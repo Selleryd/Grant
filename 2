@@ -3,1437 +3,2085 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortress Grants - AI-Powered Security Grant Solutions</title>
+    <title>Fortress AI - Next-Generation Security Grant Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'deep-navy': '#0A0F1C',
-                        'gold-accent': '#FFD700',
-                        'cyber-white': '#F8FAFC',
-                        'strategic-red': '#EF4444',
-                        'glass-blue': '#1E293B',
-                        'accent-purple': '#8B5CF6'
-                    },
-                    fontFamily: {
-                        'sans': ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-dark: #0A0B0F;
+            --secondary-dark: #0F1419;
+            --tertiary-dark: #1A1F2E;
+            --accent-primary: #00D4FF;
+            --accent-secondary: #7C3AED;
+            --accent-gold: #FFB800;
+            --accent-success: #10B981;
+            --accent-danger: #EF4444;
+            --accent-warning: #F59E0B;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A1A1AA;
+            --text-muted: #71717A;
+            --glass-primary: rgba(255, 255, 255, 0.05);
+            --glass-secondary: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-hover: rgba(0, 212, 255, 0.3);
+            --shadow-primary: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            --shadow-glow: 0 0 50px rgba(0, 212, 255, 0.3);
+            --gradient-primary: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            --gradient-gold: linear-gradient(135deg, var(--accent-gold) 0%, #FF8C00 100%);
+            --gradient-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+        }
+
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(ellipse at top, var(--secondary-dark) 0%, var(--primary-dark) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Advanced Background System */
+        .neural-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .neural-grid {
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 184, 0, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 1200px 1200px, 800px 800px, 600px 600px, 60px 60px, 60px 60px;
+            animation: neuralFloat 30s ease-in-out infinite;
+        }
+
+        @keyframes neuralFloat {
+            0%, 100% { 
+                background-position: 0% 0%, 100% 100%, 50% 50%, 0 0, 0 0;
+                transform: rotate(0deg);
+            }
+            33% { 
+                background-position: 100% 0%, 0% 100%, 0% 100%, 30px 30px, 30px 30px;
+                transform: rotate(0.5deg);
+            }
+            66% { 
+                background-position: 0% 100%, 100% 0%, 100% 0%, 60px 0px, 0px 60px;
+                transform: rotate(-0.5deg);
             }
         }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
+
+        /* Perfect Glass Morphism System */
         .glass-morphism {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--glass-primary);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-primary);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
-        
-        .glass-button {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+        .glass-morphism::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-morphism:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--glass-border-hover);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .glass-morphism:hover::before {
+            left: 100%;
+        }
+
+        .glass-premium {
+            background: var(--gradient-surface);
+            backdrop-filter: blur(32px) saturate(200%);
+            -webkit-backdrop-filter: blur(32px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                var(--shadow-primary),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 0 1px rgba(0, 212, 255, 0.1);
+        }
+
+        /* Advanced Typography */
+        .text-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        .text-gradient-gold {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Perfect Button System */
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            font-weight: 600;
+            border: none;
+            box-shadow: 
+                0 10px 25px rgba(0, 212, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 
+                0 20px 40px rgba(0, 212, 255, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: var(--glass-primary);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            font-weight: 500;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        .glass-button:hover {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.2) 100%);
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
-        
-        .glass-card {
-            background: rgba(10, 15, 28, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .glass-card:hover {
-            border-color: rgba(255, 215, 0, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-        
-        .neural-bg {
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
-                linear-gradient(135deg, #0A0F1C 0%, #1E293B 100%);
-        }
-        
-        .floating-3d {
-            animation: floating3d 6s ease-in-out infinite;
-        }
-        
-        @keyframes floating3d {
-            0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
-            33% { transform: translateY(-20px) rotateX(5deg) rotateY(5deg); }
-            66% { transform: translateY(-10px) rotateX(-5deg) rotateY(-5deg); }
-        }
-        
-        .glow-text {
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-        
-        .metric-counter {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .metric-bounce {
-            animation: metricBounce 3s ease-in-out infinite;
-        }
-        
-        @keyframes metricBounce {
-            0% { transform: translateY(0%); }
-            25% { transform: translateY(-2%); }
-            50% { transform: translateY(4%); }
-            75% { transform: translateY(-6%); }
-            100% { transform: translateY(0%); }
-        }
-        
-        .number-bounce {
-            animation: numberBounce 4s ease-in-out infinite;
-        }
-        
-        @keyframes numberBounce {
-            0% { transform: translateY(0%); }
-            25% { transform: translateY(-2%); }
-            50% { transform: translateY(2%); }
-            75% { transform: translateY(-6%); }
-            87.5% { transform: translateY(4%); }
-            100% { transform: translateY(0%); }
-        }
-        
-        .ai-grid {
-            background-image: 
-                linear-gradient(rgba(255, 215, 0, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 215, 0, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: grid-move 20s linear infinite;
-        }
-        
-        @keyframes grid-move {
-            0% { background-position: 0 0; }
-            100% { background-position: 50px 50px; }
-        }
-        
-        .success-ticker {
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-            animation: ticker 25s linear infinite;
-        }
-        
-        @keyframes ticker {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        
-        .flip-card-3d {
-            perspective: 1000px;
-        }
-        
-        .flip-card-inner-3d {
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-        
-        .flip-card-3d:hover .flip-card-inner-3d {
-            transform: rotateY(180deg);
-        }
-        
-        .flip-card-front-3d, .flip-card-back-3d {
-            backface-visibility: hidden;
+
+        /* Advanced Logo System */
+        .logo-shield {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-primary);
             border-radius: 16px;
-        }
-        
-        .flip-card-back-3d {
-            transform: rotateY(180deg);
-        }
-        
-        .ai-assistant {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        .premium-input {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .premium-input:focus {
-            border-color: rgba(255, 215, 0, 0.5);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-            outline: none;
-        }
-        
-        .slide-up {
-            animation: slideUp 0.8s ease-out;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Interactive Visualization Styles */
-        .viz-container {
-            background: rgba(10, 15, 28, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 20px;
-            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 10px 25px rgba(0, 212, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: logoFloat 6s ease-in-out infinite;
             position: relative;
         }
-        
+
+        .logo-shield::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: var(--gradient-primary);
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        @keyframes logoGlow {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        /* Advanced Feature Icons */
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 15px 35px rgba(0, 212, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: iconFloat 5s ease-in-out infinite;
+            position: relative;
+        }
+
+        .feature-icon::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: var(--gradient-primary);
+            border-radius: 21px;
+            z-index: -1;
+            opacity: 0.5;
+            filter: blur(8px);
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Perfect Navigation */
+        .nav-glass {
+            background: rgba(10, 11, 15, 0.8);
+            backdrop-filter: blur(32px) saturate(180%);
+            -webkit-backdrop-filter: blur(32px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Advanced Metrics System */
+        .metric-card {
+            background: var(--glass-secondary);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .metric-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .metric-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Advanced Threat Visualization */
+        .threat-radar {
+            width: 600px;
+            height: 600px;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+            position: relative;
+            animation: radarRotate 8s linear infinite;
+            box-shadow: 
+                0 0 100px rgba(0, 212, 255, 0.2),
+                inset 0 0 100px rgba(0, 212, 255, 0.1);
+        }
+
+        .threat-radar::before {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .threat-radar::after {
+            content: '';
+            position: absolute;
+            inset: 40px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            border-radius: 50%;
+        }
+
+        @keyframes radarRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         .radar-sweep {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 300px;
-            height: 300px;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            animation: radarSweep 4s linear infinite;
+            height: 6px;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.8), rgba(0, 212, 255, 0.4), transparent);
+            transform-origin: left center;
+            animation: radarSweep 8s linear infinite;
+            border-radius: 3px;
         }
-        
+
         @keyframes radarSweep {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-        
-        .radar-sweep::before {
-            content: '';
+
+        .threat-node {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 50%;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(255, 215, 0, 0.8), transparent);
-            transform-origin: left center;
-            transform: translateY(-50%);
-        }
-        
-        .threat-indicator {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            animation: threatPulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes threatPulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.5); opacity: 1; }
-        }
-        
-        .threat-high { background: #EF4444; box-shadow: 0 0 20px #EF4444; }
-        .threat-medium { background: #F59E0B; box-shadow: 0 0 15px #F59E0B; }
-        .threat-low { background: #10B981; box-shadow: 0 0 10px #10B981; }
-        
-        .scoring-boost {
-            position: absolute;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(139, 92, 246, 0.2));
-            border: 1px solid rgba(255, 215, 0, 0.4);
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 12px;
-            animation: scoreBoost 3s ease-in-out infinite;
-        }
-        
-        @keyframes scoreBoost {
-            0%, 100% { opacity: 0.7; transform: translateY(0px); }
-            50% { opacity: 1; transform: translateY(-5px); }
-        }
-        
-        .data-node {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-        }
-        
-        .data-node:hover {
-            transform: scale(2);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
-        }
-        
-        .connection-line {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(255, 215, 0, 0.3), rgba(139, 92, 246, 0.3));
-            transform-origin: left center;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
-        }
-        
-        .data-flow {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #FFD700;
-            border-radius: 50%;
-            animation: dataFlow 3s linear infinite;
-        }
-        
-        @keyframes dataFlow {
-            0% { transform: translateX(0) translateY(0); opacity: 1; }
-            100% { transform: translateX(400px) translateY(-200px); opacity: 0; }
-        }
-        
-        /* Luxury Calculator Styles */
-        .calculator-container {
-            background: linear-gradient(135deg, rgba(10, 15, 28, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-        
-        .luxury-input {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(10, 15, 28, 0.8) 100%);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .luxury-input:focus {
-            border-color: rgba(255, 215, 0, 0.6);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.3);
-            outline: none;
-        }
-        
-        .luxury-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            height: 8px;
-            background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.6));
-            border-radius: 4px;
-            outline: none;
-        }
-        
-        .luxury-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
-        }
-        
-        .luxury-checkbox {
-            position: relative;
-            display: inline-block;
             width: 20px;
             height: 20px;
+            border-radius: 50%;
+            animation: threatPulse 2.5s infinite;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        .luxury-checkbox input {
-            opacity: 0;
-            width: 0;
-            height: 0;
+
+        .threat-node:hover {
+            transform: scale(1.5);
+            z-index: 10;
         }
-        
-        .checkmark {
+
+        .threat-critical { 
+            background: radial-gradient(circle, var(--accent-danger), #DC2626);
+            box-shadow: 0 0 30px var(--accent-danger);
+        }
+
+        .threat-high { 
+            background: radial-gradient(circle, var(--accent-warning), #D97706);
+            box-shadow: 0 0 25px var(--accent-warning);
+        }
+
+        .threat-medium { 
+            background: radial-gradient(circle, var(--accent-gold), #F59E0B);
+            box-shadow: 0 0 20px var(--accent-gold);
+        }
+
+        .threat-low { 
+            background: radial-gradient(circle, var(--accent-success), #059669);
+            box-shadow: 0 0 15px var(--accent-success);
+        }
+
+        @keyframes threatPulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Advanced Dashboard */
+        .ai-dashboard {
+            background: var(--gradient-surface);
+            backdrop-filter: blur(32px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            box-shadow: 
+                var(--shadow-primary),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ai-dashboard::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            height: 20px;
-            width: 20px;
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            opacity: 0.6;
         }
-        
-        .luxury-checkbox input:checked ~ .checkmark {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            border-color: #FFD700;
+
+        /* Perfect Progress Rings */
+        .progress-ring {
+            transform: rotate(-90deg);
         }
-        
-        .checkmark:after {
-            content: "";
+
+        .progress-ring-circle {
+            stroke: var(--accent-primary);
+            stroke-linecap: round;
+            transition: stroke-dasharray 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.5));
+        }
+
+        /* Advanced Testimonials */
+        .testimonial-card {
+            background: var(--gradient-surface);
+            backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card::before {
+            content: '';
             position: absolute;
-            display: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        
-        .luxury-checkbox input:checked ~ .checkmark:after {
-            display: block;
+
+        .testimonial-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
         }
-        
-        .luxury-checkbox .checkmark:after {
-            left: 7px;
-            top: 3px;
-            width: 5px;
-            height: 10px;
-            border: solid #0A0F1C;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
+
+        .testimonial-card:hover::before {
+            opacity: 1;
         }
-        
-        .result-card {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 215, 0, 0.4);
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
+
+        /* Perfect Pricing Cards */
+        .pricing-card {
+            background: var(--gradient-surface);
+            backdrop-filter: blur(28px) saturate(180%);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
-        
-        .rating-stars {
-            color: #FFD700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+
+        .pricing-card.featured {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 80px rgba(0, 212, 255, 0.4);
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%,
+                rgba(124, 58, 237, 0.05) 50%,
+                rgba(255, 255, 255, 0.05) 100%);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-16px) scale(1.05);
+            box-shadow: 0 40px 80px rgba(0, 212, 255, 0.3);
+            border-color: var(--accent-primary);
+        }
+
+        /* Advanced Loading States */
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(0, 212, 255, 0.2);
+            border-top: 4px solid var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Perfect Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .threat-radar {
+                width: 400px;
+                height: 400px;
+            }
+            
+            .radar-sweep {
+                width: 200px;
+            }
+            
+            .logo-shield {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .feature-icon {
+                width: 64px;
+                height: 64px;
+            }
+        }
+
+        /* Advanced Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Perfect Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+        }
+
+        /* Advanced Selection */
+        ::selection {
+            background: rgba(0, 212, 255, 0.3);
+            color: white;
+        }
+
+        /* Perfect Focus States */
+        *:focus {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        /* Advanced Tooltip System */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.95);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 1000;
+            pointer-events: none;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(16px);
+        }
+
+        /* Perfect Status Indicators */
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            animation: statusPulse 2s infinite;
+        }
+
+        .status-online { background: var(--accent-success); }
+        .status-warning { background: var(--accent-warning); }
+        .status-error { background: var(--accent-danger); }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Advanced Data Visualization */
+        .chart-container {
+            background: var(--glass-secondary);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+        }
+
+        .chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            opacity: 0.6;
+            border-radius: 16px 16px 0 0;
+        }
+
+        /* Perfect Form Elements */
+        .form-input {
+            background: var(--glass-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: var(--text-primary);
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(16px);
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Advanced Badge System */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-primary {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--accent-primary);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .badge-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-warning);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
     </style>
 </head>
-<body class="bg-deep-navy text-cyber-white font-sans overflow-x-hidden">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-morphism">
-        <div class="max-w-7xl mx-auto px-6 py-4">
+<body>
+    <!-- Neural Background System -->
+    <div class="neural-bg">
+        <div class="neural-grid absolute inset-0"></div>
+        <canvas id="neural-canvas" class="absolute inset-0 w-full h-full"></canvas>
+    </div>
+
+    <!-- Perfect Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-glass">
+        <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 glass-button rounded-xl flex items-center justify-center">
-                        <i class="fas fa-shield-alt text-2xl text-gold-accent"></i>
+                    <div class="logo-shield">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-bold glow-text">Fortress Grants</h1>
-                        <div class="flex items-center space-x-2">
-                            <div class="rating-stars text-xs">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="text-xs text-cyber-white/60">4.9 • 500+ happy clients</span>
-                        </div>
+                        <div class="text-2xl font-black text-gradient">FORTRESS</div>
+                        <div class="text-xs text-gradient mono tracking-wider">AI INTELLIGENCE</div>
                     </div>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#platform" class="hover:text-gold-accent transition-colors font-medium">Platform</a>
-                    <a href="#success" class="hover:text-gold-accent transition-colors font-medium">Success</a>
-                    <a href="#calculator" class="hover:text-gold-accent transition-colors font-medium">AI Calculator</a>
-                    <a href="#team" class="hover:text-gold-accent transition-colors font-medium">Experts</a>
+                
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#platform" class="text-sm font-medium hover:text-cyan-400 transition-colors duration-300">AI Platform</a>
+                    <a href="#intelligence" class="text-sm font-medium hover:text-cyan-400 transition-colors duration-300">Threat Intel</a>
+                    <a href="#calculator" class="text-sm font-medium hover:text-cyan-400 transition-colors duration-300">Grant Calculator</a>
+                    <a href="#success" class="text-sm font-medium hover:text-cyan-400 transition-colors duration-300">Success Stories</a>
+                    <a href="#pricing" class="text-sm font-medium hover:text-cyan-400 transition-colors duration-300">Pricing</a>
                 </div>
-                <button class="glass-button px-6 py-3 rounded-xl font-semibold text-gold-accent">
-                    <i class="fas fa-tachometer-alt mr-2"></i>Client Dashboard
-                </button>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex items-center space-x-2 text-sm">
+                        <div class="status-indicator status-online"></div>
+                        <span class="text-green-400 font-medium">System Online</span>
+                    </div>
+                    <button class="btn-secondary px-4 py-2 rounded-lg text-sm">
+                        Sign In
+                    </button>
+                    <button class="btn-primary px-6 py-2 rounded-lg text-sm">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Launch Dashboard
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center neural-bg overflow-hidden">
-        <div class="ai-grid absolute inset-0 opacity-30"></div>
-        
-        <div class="text-center z-10 max-w-6xl mx-auto px-6">
-            <div class="mb-12 floating-3d">
-                <div class="text-5xl mb-4">
-                    <i class="fas fa-shield-alt text-gold-accent"></i>
+    <!-- Perfect Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="max-w-6xl mx-auto">
+                <!-- Hero Badge -->
+                <div class="inline-flex items-center space-x-2 glass-morphism px-6 py-3 rounded-full mb-8 fade-in-up">
+                    <div class="flex items-center text-cyan-400">
+                        <i class="fas fa-star text-sm"></i>
+                        <i class="fas fa-star text-sm"></i>
+                        <i class="fas fa-star text-sm"></i>
+                        <i class="fas fa-star text-sm"></i>
+                        <i class="fas fa-star text-sm"></i>
+                    </div>
+                    <span class="text-sm font-medium text-gray-300">4.9/5 • 500+ Organizations Protected</span>
+                    <div class="badge badge-success">
+                        <i class="fas fa-shield-check mr-1"></i>
+                        SOC 2 Certified
+                    </div>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-black mb-6 bg-gradient-to-r from-gold-accent via-cyber-white to-accent-purple bg-clip-text text-transparent leading-tight">
-                    FORTRESS<br/>GRANTS
+
+                <!-- Main Hero Content -->
+                <h1 class="text-6xl md:text-7xl lg:text-8xl font-black text-gradient mb-8 leading-tight fade-in-up" style="animation-delay: 0.2s;">
+                    NEXT-GEN<br>
+                    <span class="text-gradient-gold">AI SECURITY</span><br>
+                    INTELLIGENCE
                 </h1>
-                <p class="text-2xl md:text-4xl text-cyber-white/80 mb-4 font-light">
-                    AI-Powered Security Grant Solutions
+
+                <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed fade-in-up" style="animation-delay: 0.4s;">
+                    Revolutionary artificial intelligence meets expert grant strategy to secure maximum funding for your organization's security infrastructure. Our proprietary neural networks analyze threat patterns, funding opportunities, and success metrics in real-time.
                 </p>
-                <p class="text-lg text-cyber-white/60 max-w-2xl mx-auto">
-                    Advanced artificial intelligence meets expert grant writing to secure maximum funding for your organization's security needs
-                </p>
-            </div>
-            
-            <!-- AI Metrics HUD -->
-            <div class="grid md:grid-cols-4 gap-6 mb-16 slide-up">
-                <div class="metric-counter rounded-2xl p-6">
-                    <div class="text-4xl font-black text-gold-accent mb-2">$47.2M</div>
-                    <div class="text-cyber-white/70 text-sm font-medium">AI-Secured Grants</div>
+
+                <!-- Enhanced Stats Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 fade-in-up" style="animation-delay: 0.6s;">
+                    <div class="metric-card p-6 text-center">
+                        <div class="text-3xl font-black text-gradient mb-2" id="total-secured">$47.2M</div>
+                        <div class="text-sm text-gray-400 font-medium">AI-Secured Grants</div>
+                        <div class="text-xs text-green-400 mt-1">↗ +23% this quarter</div>
+                    </div>
+                    <div class="metric-card p-6 text-center">
+                        <div class="text-3xl font-black text-gradient mb-2">96.8%</div>
+                        <div class="text-sm text-gray-400 font-medium">Success Rate</div>
+                        <div class="text-xs text-green-400 mt-1">Industry leading</div>
+                    </div>
+                    <div class="metric-card p-6 text-center">
+                        <div class="text-3xl font-black text-gradient mb-2" id="active-clients">312</div>
+                        <div class="text-sm text-gray-400 font-medium">Active Clients</div>
+                        <div class="text-xs text-cyan-400 mt-1">Live monitoring</div>
+                    </div>
+                    <div class="metric-card p-6 text-center">
+                        <div class="text-3xl font-black text-gradient mb-2">24/7</div>
+                        <div class="text-sm text-gray-400 font-medium">AI Monitoring</div>
+                        <div class="text-xs text-purple-400 mt-1">Neural networks</div>
+                    </div>
                 </div>
-                <div class="metric-counter rounded-2xl p-6">
-                    <div class="text-4xl font-black text-gold-accent mb-2">96.8%</div>
-                    <div class="text-cyber-white/70 text-sm font-medium">Success Rate</div>
+
+                <!-- Perfect CTA Section -->
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center fade-in-up" style="animation-delay: 0.8s;">
+                    <button class="btn-primary px-10 py-4 rounded-xl text-lg font-bold flex items-center">
+                        <i class="fas fa-brain mr-3"></i>
+                        Launch AI Assessment
+                        <i class="fas fa-arrow-right ml-3"></i>
+                    </button>
+                    <button class="btn-secondary px-10 py-4 rounded-xl text-lg font-bold flex items-center">
+                        <i class="fas fa-play mr-3"></i>
+                        View Live Demo
+                    </button>
                 </div>
-                <div class="metric-counter metric-bounce rounded-2xl p-6">
-                    <div class="text-4xl font-black text-gold-accent mb-2 number-bounce">312</div>
-                    <div class="text-cyber-white/70 text-sm font-medium">Active Clients</div>
+
+                <!-- Trust Indicators -->
+                <div class="mt-16 flex flex-wrap justify-center items-center gap-8 opacity-60 fade-in-up" style="animation-delay: 1s;">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-certificate text-green-400"></i>
+                        <span class="text-sm font-medium">DHS Certified</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-shield-check text-blue-400"></i>
+                        <span class="text-sm font-medium">FEMA Approved</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-lock text-purple-400"></i>
+                        <span class="text-sm font-medium">Bank-Grade Security</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-award text-yellow-400"></i>
+                        <span class="text-sm font-medium">ISO 27001</span>
+                    </div>
                 </div>
-                <div class="metric-counter rounded-2xl p-6">
-                    <div class="text-4xl font-black text-gold-accent mb-2">24/7</div>
-                    <div class="text-cyber-white/70 text-sm font-medium">AI Monitoring</div>
-                </div>
-            </div>
-            
-            <!-- Premium CTA Buttons -->
-            <div class="flex flex-col md:flex-row gap-6 justify-center">
-                <button class="glass-button px-10 py-5 rounded-2xl font-bold text-xl text-gold-accent transform hover:scale-105 transition-all duration-300">
-                    <i class="fas fa-rocket mr-3"></i>Launch AI Assessment
-                </button>
-                <button class="glass-button px-10 py-5 rounded-2xl font-bold text-xl text-cyber-white transform hover:scale-105 transition-all duration-300">
-                    <i class="fas fa-chart-line mr-3"></i>View Live Demo
-                </button>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Security Intelligence Visualization -->
-    <section id="visualization" class="py-24 neural-bg">
-        <div class="max-w-7xl mx-auto px-6">
+    <!-- Perfect AI Platform Section -->
+    <section id="platform" class="py-32 relative">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-20">
-                <h2 class="text-6xl font-black mb-8 glow-text">Live Security Intelligence</h2>
-                <p class="text-xl text-cyber-white/70 max-w-3xl mx-auto">
-                    Real-time threat monitoring across New York State - AI tracks security incidents to maximize grant application scoring
+                <div class="badge badge-primary mb-6">
+                    <i class="fas fa-microchip mr-2"></i>
+                    AI-Powered Platform
+                </div>
+                <h2 class="text-5xl md:text-6xl font-black text-gradient mb-8">
+                    Revolutionary AI Engine
+                </h2>
+                <p class="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+                    Our sophisticated neural networks process millions of data points to identify optimal funding opportunities, craft winning applications, and predict success probabilities with unprecedented accuracy.
                 </p>
             </div>
             
-            <div class="viz-container p-8">
-                <div class="grid lg:grid-cols-3 gap-12 items-center">
-                    <div class="lg:col-span-2">
-                        <!-- Security Threat Radar -->
-                        <div id="security-radar" class="relative w-full h-96 bg-gradient-to-br from-deep-navy/50 to-glass-blue/50 rounded-2xl overflow-hidden">
-                            <!-- Radar Sweep -->
-                            <div class="radar-sweep"></div>
-                            
-                            <!-- Radar Rings -->
-                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 border border-gold-accent/20 rounded-full"></div>
-                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-gold-accent/20 rounded-full"></div>
-                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 border border-gold-accent/20 rounded-full"></div>
-                            
-                            <!-- Central Command -->
-                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                <div class="w-12 h-12 bg-gradient-to-br from-gold-accent to-accent-purple rounded-full flex items-center justify-center shadow-2xl">
-                                    <i class="fas fa-shield-alt text-lg text-deep-navy"></i>
-                                </div>
+            <!-- Feature Grid -->
+            <div class="grid lg:grid-cols-3 gap-8 mb-20">
+                <div class="glass-morphism p-8 rounded-3xl text-center">
+                    <div class="feature-icon mx-auto mb-8">
+                        <i class="fas fa-brain text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">Neural Grant Analysis</h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Advanced deep learning algorithms analyze historical grant data, success patterns, and funding trends to optimize your applications with 96.8% accuracy.
+                    </p>
+                    
+                    <!-- Enhanced Progress Indicator -->
+                    <div class="chart-container">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-medium text-gray-400">Processing Power</span>
+                            <span class="text-sm font-bold text-cyan-400">94.2% Accuracy</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                            <div class="bg-gradient-to-r from-cyan-400 to-purple-500 h-3 rounded-full transition-all duration-1000" style="width: 94.2%"></div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <div class="text-lg font-bold text-green-400">2.3M</div>
+                                <div class="text-xs text-gray-500">Data Points</div>
                             </div>
-                            
-                            <!-- Threat Indicators -->
-                            <div class="threat-indicator threat-high" style="top: 25%; left: 20%;" onclick="showThreatDetails('Synagogue Vandalism', 'Brooklyn', 'High', '+15 pts')"></div>
-                            <div class="threat-indicator threat-medium" style="top: 35%; left: 75%;" onclick="showThreatDetails('Suspicious Activity', 'Manhattan', 'Medium', '+8 pts')"></div>
-                            <div class="threat-indicator threat-high" style="top: 65%; left: 30%;" onclick="showThreatDetails('Hate Crime Report', 'Queens', 'High', '+12 pts')"></div>
-                            <div class="threat-indicator threat-low" style="top: 75%; left: 70%;" onclick="showThreatDetails('Security Breach', 'Bronx', 'Low', '+5 pts')"></div>
-                            <div class="threat-indicator threat-medium" style="top: 45%; left: 85%;" onclick="showThreatDetails('Threat Assessment', 'Staten Island', 'Medium', '+9 pts')"></div>
-                            
-                            <!-- Scoring Boosts -->
-                            <div class="scoring-boost" style="top: 20%; left: 25%;">+15 Grant Points</div>
-                            <div class="scoring-boost" style="top: 60%; left: 35%;" style="animation-delay: 1s;">+12 Grant Points</div>
-                            <div class="scoring-boost" style="top: 40%; left: 80%;" style="animation-delay: 2s;">+8 Grant Points</div>
-                            
-                            <!-- Live Stats Overlay -->
-                            <div class="absolute top-4 left-4 glass-card rounded-xl p-4">
-                                <div class="text-xs text-cyber-white/60 mb-1">Active Threats</div>
-                                <div class="text-lg font-bold text-strategic-red">
-                                    <i class="fas fa-exclamation-triangle text-xs mr-2 animate-pulse"></i>
-                                    <span id="threat-counter">47</span> detected
-                                </div>
+                            <div>
+                                <div class="text-lg font-bold text-blue-400">847</div>
+                                <div class="text-xs text-gray-500">Grant Types</div>
                             </div>
-                            
-                            <div class="absolute top-4 right-4 glass-card rounded-xl p-4">
-                                <div class="text-xs text-cyber-white/60 mb-1">Grant Score Boost</div>
-                                <div class="text-lg font-bold text-gold-accent">+<span id="score-boost">127</span> pts</div>
-                            </div>
-                            
-                            <div class="absolute bottom-4 left-4 glass-card rounded-xl p-4">
-                                <div class="text-xs text-cyber-white/60 mb-1">AI Analysis</div>
-                                <div class="text-lg font-bold text-accent-purple">Real-time</div>
-                            </div>
-                            
-                            <div class="absolute bottom-4 right-4 glass-card rounded-xl p-4">
-                                <div class="text-xs text-cyber-white/60 mb-1">Coverage Area</div>
-                                <div class="text-lg font-bold text-cyber-white">NY State</div>
+                            <div>
+                                <div class="text-lg font-bold text-purple-400">99.7%</div>
+                                <div class="text-xs text-gray-500">Uptime</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                
+                <div class="glass-morphism p-8 rounded-3xl text-center">
+                    <div class="feature-icon mx-auto mb-8" style="background: linear-gradient(135deg, #EF4444 0%, #F59E0B 100%);">
+                        <i class="fas fa-shield-virus text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">Real-Time Threat Intelligence</h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Continuous threat monitoring and risk assessment powered by machine learning to strengthen grant applications with current security data.
+                    </p>
+                    
+                    <div class="chart-container">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-medium text-gray-400">Threat Detection</span>
+                            <span class="text-sm font-bold text-red-400">87.3% Coverage</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                            <div class="bg-gradient-to-r from-red-500 to-orange-500 h-3 rounded-full transition-all duration-1000" style="width: 87.3%"></div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <div class="text-lg font-bold text-red-400">1,247</div>
+                                <div class="text-xs text-gray-500">Active Threats</div>
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold text-orange-400">156</div>
+                                <div class="text-xs text-gray-500">Sources</div>
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold text-yellow-400">24/7</div>
+                                <div class="text-xs text-gray-500">Monitoring</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-morphism p-8 rounded-3xl text-center">
+                    <div class="feature-icon mx-auto mb-8" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);">
+                        <i class="fas fa-chart-line text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">Success Optimization</h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Continuous learning from successful grants to improve future applications and maximize funding potential through predictive analytics.
+                    </p>
+                    
+                    <div class="chart-container">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-medium text-gray-400">Success Rate</span>
+                            <span class="text-sm font-bold text-green-400">96.8% Success</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                            <div class="bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-1000" style="width: 96.8%"></div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <div class="text-lg font-bold text-green-400">$47.2M</div>
+                                <div class="text-xs text-gray-500">Secured</div>
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold text-emerald-400">312</div>
+                                <div class="text-xs text-gray-500">Clients</div>
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold text-teal-400">18</div>
+                                <div class="text-xs text-gray-500">Avg Days</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Perfect AI Dashboard Preview -->
+            <div class="ai-dashboard p-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="badge badge-primary mb-6">
+                            <i class="fas fa-tachometer-alt mr-2"></i>
+                            Live Dashboard
+                        </div>
+                        <h3 class="text-4xl font-bold mb-6 text-gradient">
+                            Real-Time AI Command Center
+                        </h3>
+                        <p class="text-gray-400 mb-8 text-lg leading-relaxed">
+                            Monitor your grant applications, track funding opportunities, and receive AI-powered insights through our intuitive, real-time dashboard with predictive analytics.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center p-4 glass-morphism rounded-xl">
+                                <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Live Application Tracking</div>
+                                    <div class="text-sm text-gray-400">Real-time status updates and progress monitoring</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-4 glass-morphism rounded-xl">
+                                <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-bell text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Intelligent Deadline Management</div>
+                                    <div class="text-sm text-gray-400">AI-powered reminders and timeline optimization</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-4 glass-morphism rounded-xl">
+                                <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-violet-500 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-brain text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Success Probability Scoring</div>
+                                    <div class="text-sm text-gray-400">ML-powered success prediction and optimization</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-4 glass-morphism rounded-xl">
+                                <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-search text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Funding Opportunity Alerts</div>
+                                    <div class="text-sm text-gray-400">Automated discovery of new grant opportunities</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-primary px-8 py-4 rounded-xl font-bold">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Explore Dashboard
+                        </button>
+                    </div>
+                    
+                    <div class="relative">
+                        <div class="glass-premium p-8 rounded-3xl">
+                            <!-- Dashboard Header -->
+                            <div class="flex justify-between items-center mb-8">
+                                <div>
+                                    <h4 class="text-xl font-bold">Grant Portfolio</h4>
+                                    <p class="text-sm text-gray-400">Live AI Analysis</p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="status-indicator status-online"></div>
+                                    <span class="text-sm font-medium text-green-400">Live</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Key Metrics -->
+                            <div class="grid grid-cols-2 gap-6 mb-8">
+                                <div class="chart-container text-center">
+                                    <div class="text-3xl font-black text-gradient-gold mb-2">$2.4M</div>
+                                    <div class="text-sm text-gray-400">Pending Applications</div>
+                                    <div class="text-xs text-green-400 mt-1">↗ +15% this month</div>
+                                </div>
+                                <div class="chart-container text-center">
+                                    <div class="text-3xl font-black text-gradient mb-2">89.3%</div>
+                                    <div class="text-sm text-gray-400">Success Probability</div>
+                                    <div class="text-xs text-cyan-400 mt-1">AI Confidence</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Application Status List -->
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center p-4 glass-morphism rounded-xl">
+                                    <div class="flex items-center">
+                                        <div class="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></div>
+                                        <div>
+                                            <div class="font-medium">DHS Security Grant</div>
+                                            <div class="text-xs text-gray-400">$285,000 • Religious Institution</div>
+                                        </div>
+                                    </div>
+                                    <div class="badge badge-success">Approved</div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center p-4 glass-morphism rounded-xl">
+                                    <div class="flex items-center">
+                                        <div class="w-3 h-3 bg-yellow-400 rounded-full mr-3 animate-pulse"></div>
+                                        <div>
+                                            <div class="font-medium">FEMA Nonprofit Security</div>
+                                            <div class="text-xs text-gray-400">$195,000 • Community Center</div>
+                                        </div>
+                                    </div>
+                                    <div class="badge badge-warning">Under Review</div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center p-4 glass-morphism rounded-xl">
+                                    <div class="flex items-center">
+                                        <div class="w-3 h-3 bg-blue-400 rounded-full mr-3 animate-pulse"></div>
+                                        <div>
+                                            <div class="font-medium">State Emergency Grant</div>
+                                            <div class="text-xs text-gray-400">$340,000 • Educational Facility</div>
+                                        </div>
+                                    </div>
+                                    <div class="badge badge-primary">Submitted</div>
+                                </div>
+                            </div>
+                            
+                            <!-- AI Insights -->
+                            <div class="mt-8 p-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-xl border border-cyan-500/20">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-lightbulb text-cyan-400 mr-2"></i>
+                                    <span class="text-sm font-semibold text-cyan-400">AI Insight</span>
+                                </div>
+                                <p class="text-sm text-gray-300">
+                                    Based on current trends, submitting your next application by March 15th could increase success probability by 12%.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perfect Threat Intelligence Section -->
+    <section id="intelligence" class="py-32 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <div class="badge badge-danger mb-6">
+                    <i class="fas fa-shield-virus mr-2"></i>
+                    Live Threat Intelligence
+                </div>
+                <h2 class="text-5xl md:text-6xl font-black text-gradient mb-8">
+                    Advanced Threat Monitoring
+                </h2>
+                <p class="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+                    Real-time AI-powered threat intelligence across New York State and Tri-State Area with predictive analytics, risk assessment, and automated funding correlation analysis.
+                </p>
+            </div>
+            
+            <!-- Perfect Threat Radar -->
+            <div class="flex justify-center mb-20">
+                <div class="relative">
+                    <div class="threat-radar glass-morphism flex items-center justify-center">
+                        <div class="radar-sweep"></div>
+                        
+                        <!-- Enhanced Threat Nodes -->
+                        <div class="threat-node threat-critical" style="top: 20%; left: 30%;" 
+                             data-threat="Critical: Synagogue Threats - Manhattan - $350K Funding Available"></div>
+                        <div class="threat-node threat-high" style="top: 40%; left: 70%;" 
+                             data-threat="High Risk: Community Center - Brooklyn - $280K Recommended"></div>
+                        <div class="threat-node threat-medium" style="top: 65%; left: 25%;" 
+                             data-threat="Medium Risk: Church Security - Queens - $180K Available"></div>
+                        <div class="threat-node threat-critical" style="top: 25%; left: 75%;" 
+                             data-threat="Critical: School Threat - Bronx - $420K Emergency Funding"></div>
+                        <div class="threat-node threat-high" style="top: 55%; left: 50%;" 
+                             data-threat="High Risk: Mosque Security - Staten Island - $250K Available"></div>
+                        <div class="threat-node threat-low" style="top: 80%; left: 60%;" 
+                             data-threat="Low Risk: Community Center - Long Island - $120K Available"></div>
+                        <div class="threat-node threat-medium" style="top: 35%; left: 45%;" 
+                             data-threat="Medium Risk: Religious Center - Westchester - $200K Available"></div>
+                        <div class="threat-node threat-high" style="top: 70%; left: 80%;" 
+                             data-threat="High Risk: Educational Facility - Nassau - $320K Available"></div>
+                    </div>
+                    
+                    <!-- Radar Legend -->
+                    <div class="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
+                        <div class="flex items-center space-x-6 glass-morphism px-6 py-3 rounded-full">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                                <span class="text-xs font-medium">Critical</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
+                                <span class="text-xs font-medium">High</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                                <span class="text-xs font-medium">Medium</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                                <span class="text-xs font-medium">Low</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Analytics Grid -->
+            <div class="grid lg:grid-cols-3 gap-8 mb-16">
+                <div class="glass-morphism p-8 rounded-3xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-exclamation-triangle text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Active Threats</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-red-500/10 rounded-xl border border-red-500/20">
+                            <div>
+                                <div class="font-medium">Antisemitic Incidents</div>
+                                <div class="text-sm text-gray-400">NYC Metro Area</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-red-400 font-bold">+23%</div>
+                                <div class="text-xs text-gray-400">vs last month</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-4 bg-orange-500/10 rounded-xl border border-orange-500/20">
+                            <div>
+                                <div class="font-medium">Vandalism Reports</div>
+                                <div class="text-sm text-gray-400">Religious Sites</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-orange-400 font-bold">+15%</div>
+                                <div class="text-xs text-gray-400">vs last month</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-4 bg-yellow-500/10 rounded-xl border border-yellow-500/20">
+                            <div>
+                                <div class="font-medium">Suspicious Activity</div>
+                                <div class="text-sm text-gray-400">Community Centers</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-yellow-400 font-bold">+8%</div>
+                                <div class="text-xs text-gray-400">vs last month</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-xl border border-red-500/20">
+                        <div class="text-sm font-semibold text-red-400 mb-1">AI Alert</div>
+                        <div class="text-sm text-gray-300">Elevated threat level detected in Manhattan area. Recommend immediate security assessment.</div>
+                    </div>
+                </div>
+                
+                <div class="glass-morphism p-8 rounded-3xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-chart-bar text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Funding Correlation</h3>
                     </div>
                     
                     <div class="space-y-6">
-                        <div id="threat-details" class="glass-card rounded-2xl p-8">
-                            <h3 class="text-2xl font-bold text-gold-accent mb-6">
-                                <i class="fas fa-shield-alt mr-3"></i>Threat Intelligence
-                            </h3>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="font-medium">Critical Risk Areas</span>
+                                <span class="text-red-400 font-bold">$350K avg</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                                <div class="bg-gradient-to-r from-red-500 to-pink-500 h-3 rounded-full transition-all duration-1000" style="width: 95%"></div>
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1">95% funding success rate</div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="font-medium">High Risk Areas</span>
+                                <span class="text-orange-400 font-bold">$250K avg</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                                <div class="bg-gradient-to-r from-orange-500 to-yellow-500 h-3 rounded-full transition-all duration-1000" style="width: 85%"></div>
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1">85% funding success rate</div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="font-medium">Medium Risk Areas</span>
+                                <span class="text-yellow-400 font-bold">$180K avg</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                                <div class="bg-gradient-to-r from-yellow-500 to-green-500 h-3 rounded-full transition-all duration-1000" style="width: 65%"></div>
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1">65% funding success rate</div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="font-medium">Low Risk Areas</span>
+                                <span class="text-green-400 font-bold">$120K avg</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                                <div class="bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full transition-all duration-1000" style="width: 45%"></div>
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1">45% funding success rate</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-morphism p-8 rounded-3xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-brain text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">AI Predictions</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 bg-purple-500/10 rounded-xl border border-purple-500/20">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-medium">Next 30 Days</div>
+                                <div class="badge badge-primary">High Confidence</div>
+                            </div>
+                            <div class="text-sm text-gray-400">
+                                Increased funding opportunities for religious institutions. $15M additional federal allocation expected.
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 bg-blue-500/10 rounded-xl border border-blue-500/20">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-medium">Q2 2024</div>
+                                <div class="badge badge-success">Confirmed</div>
+                            </div>
+                            <div class="text-sm text-gray-400">
+                                DHS announces $50M security grant program. Early applications show 23% higher success rate.
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 bg-green-500/10 rounded-xl border border-green-500/20">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-medium">Trend Analysis</div>
+                                <div class="badge badge-warning">Monitoring</div>
+                            </div>
+                            <div class="text-sm text-gray-400">
+                                AI-optimized applications show 96.8% success rate vs 34% industry average.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-xl border border-purple-500/20">
+                        <div class="text-sm font-semibold text-purple-400 mb-1">Neural Network Insight</div>
+                        <div class="text-sm text-gray-300">Optimal application window detected: March 15 - April 30. Submit now for maximum success probability.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Perfect Success Map -->
+            <div class="glass-premium p-10 rounded-3xl">
+                <div class="flex flex-col lg:flex-row justify-between items-center mb-10">
+                    <div>
+                        <div class="badge badge-success mb-4">
+                            <i class="fas fa-map-marked-alt mr-2"></i>
+                            Interactive Map
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4 text-gradient">Grant Success Visualization</h3>
+                        <p class="text-gray-400 text-lg">Real-time mapping of successful grant applications and funding distribution across New York State</p>
+                    </div>
+                    <div class="flex flex-wrap gap-3 mt-6 lg:mt-0">
+                        <button class="px-4 py-2 bg-cyan-400/20 text-cyan-400 rounded-xl text-sm font-medium border border-cyan-400/30 active-filter">
+                            All Counties
+                        </button>
+                        <button class="px-4 py-2 bg-white/10 text-gray-300 rounded-xl text-sm font-medium hover:bg-white/20 transition-colors">
+                            Religious
+                        </button>
+                        <button class="px-4 py-2 bg-white/10 text-gray-300 rounded-xl text-sm font-medium hover:bg-white/20 transition-colors">
+                            Nonprofit
+                        </button>
+                        <button class="px-4 py-2 bg-white/10 text-gray-300 rounded-xl text-sm font-medium hover:bg-white/20 transition-colors">
+                            $100K+
+                        </button>
+                        <button class="px-4 py-2 bg-white/10 text-gray-300 rounded-xl text-sm font-medium hover:bg-white/20 transition-colors">
+                            2024
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="relative h-96 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20 rounded-2xl overflow-hidden border border-white/10">
+                    <div class="absolute inset-0 bg-gradient-to-br from-transparent via-cyan-500/5 to-transparent"></div>
+                    
+                    <!-- Enhanced Grant Success Pins -->
+                    <div class="absolute top-1/3 left-3/5 w-5 h-5 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full cursor-pointer animate-pulse shadow-lg" 
+                         data-grant="Temple Emet NYC – $285,000 – Advanced Surveillance & Bollards – 2024 – 18 days approval"></div>
+                    <div class="absolute top-1/4 left-2/5 w-5 h-5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full cursor-pointer animate-pulse shadow-lg" 
+                         data-grant="St. Mary's Church – $195,000 – Access Control System – 2024 – 12 days approval"></div>
+                    <div class="absolute top-3/5 left-1/3 w-5 h-5 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full cursor-pointer animate-pulse shadow-lg" 
+                         data-grant="Community Center Brooklyn – $340,000 – Full Security Suite – 2023 – 21 days approval"></div>
+                    <div class="absolute top-1/5 left-4/5 w-5 h-5 bg-gradient-to-r from-purple-400 to-violet-500 rounded-full cursor-pointer animate-pulse shadow-lg" 
+                         data-grant="Synagogue Albany – $165,000 – Perimeter Security – 2024 – 15 days approval"></div>
+                    <div class="absolute top-2/3 left-4/5 w-5 h-5 bg-gradient-to-r from-red-400 to-pink-500 rounded-full cursor-pointer animate-pulse shadow-lg" 
+                         data-grant="Islamic Center Queens – $220,000 – Surveillance System – 2023 – 19 days approval"></div>
+                    <div class="absolute top-1/2 left-1/5 w-5 h-5 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-full cursor-pointer animate-pulse shadow-lg" 
+                         data-grant="Baptist Church Buffalo – $185,000 – Emergency Systems – 2024 – 16 days approval"></div>
+                    <div class="absolute top-3/4 left-2/3 w-5 h-5 bg-gradient-to-r from-teal-400 to-cyan-500 rounded-full cursor-pointer animate-pulse shadow-lg" 
+                         data-grant="Hindu Temple Long Island – $275,000 – Comprehensive Security – 2024 – 14 days approval"></div>
+                    <div class="absolute top-2/5 left-1/2 w-5 h-5 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-full cursor-pointer animate-pulse shadow-lg" 
+                         data-grant="Community Center Manhattan – $420,000 – Advanced AI Security – 2024 – 22 days approval"></div>
+                </div>
+                
+                <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-gradient-gold mb-2">$47.2M</div>
+                        <div class="text-sm text-gray-400 font-medium">Total Secured</div>
+                        <div class="text-xs text-green-400 mt-1">↗ +23% YoY</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-gradient mb-2">312</div>
+                        <div class="text-sm text-gray-400 font-medium">Organizations</div>
+                        <div class="text-xs text-cyan-400 mt-1">Active clients</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-gradient mb-2">96.8%</div>
+                        <div class="text-sm text-gray-400 font-medium">Success Rate</div>
+                        <div class="text-xs text-purple-400 mt-1">AI-powered</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-gradient mb-2">16</div>
+                        <div class="text-sm text-gray-400 font-medium">Avg Days</div>
+                        <div class="text-xs text-orange-400 mt-1">To approval</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perfect AI Grant Calculator -->
+    <section id="calculator" class="py-32 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <div class="badge badge-primary mb-6">
+                    <i class="fas fa-calculator mr-2"></i>
+                    AI Grant Calculator
+                </div>
+                <h2 class="text-5xl md:text-6xl font-black text-gradient mb-8">
+                    Intelligent Funding Estimator
+                </h2>
+                <p class="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+                    Advanced neural networks analyze your organization's profile, threat level, and security needs to provide precise funding estimates with optimization recommendations and success probability scoring.
+                </p>
+            </div>
+            
+            <div class="max-w-7xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-16">
+                    <!-- Perfect Input Section -->
+                    <div class="space-y-8">
+                        <div class="glass-morphism p-8 rounded-3xl">
+                            <label class="block text-white font-bold mb-6 flex items-center text-lg">
+                                <div class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-building text-white"></i>
+                                </div>
+                                Organization Type
+                            </label>
+                            <select class="form-input w-full text-lg" id="org-type">
+                                <option value="">Select your organization type</option>
+                                <option value="religious">Religious Institution</option>
+                                <option value="nonprofit">Nonprofit Organization</option>
+                                <option value="community">Community Center</option>
+                                <option value="educational">Educational Facility</option>
+                                <option value="healthcare">Healthcare Facility</option>
+                            </select>
+                        </div>
+                        
+                        <div class="glass-morphism p-8 rounded-3xl">
+                            <label class="block text-white font-bold mb-6 flex items-center text-lg">
+                                <div class="w-10 h-10 bg-gradient-to-r from-purple-400 to-violet-500 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-users text-white"></i>
+                                </div>
+                                Organization Size
+                            </label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button class="org-size-btn p-6 glass-morphism rounded-2xl hover:border-cyan-400/50 transition-all duration-300" data-size="small">
+                                    <div class="font-semibold text-lg mb-2">Small</div>
+                                    <div class="text-sm text-gray-400">1-50 people</div>
+                                    <div class="text-xs text-cyan-400 mt-2">$80K-$150K range</div>
+                                </button>
+                                <button class="org-size-btn p-6 glass-morphism rounded-2xl hover:border-cyan-400/50 transition-all duration-300" data-size="medium">
+                                    <div class="font-semibold text-lg mb-2">Medium</div>
+                                    <div class="text-sm text-gray-400">51-200 people</div>
+                                    <div class="text-xs text-cyan-400 mt-2">$150K-$300K range</div>
+                                </button>
+                                <button class="org-size-btn p-6 glass-morphism rounded-2xl hover:border-cyan-400/50 transition-all duration-300" data-size="large">
+                                    <div class="font-semibold text-lg mb-2">Large</div>
+                                    <div class="text-sm text-gray-400">201-500 people</div>
+                                    <div class="text-xs text-cyan-400 mt-2">$300K-$500K range</div>
+                                </button>
+                                <button class="org-size-btn p-6 glass-morphism rounded-2xl hover:border-cyan-400/50 transition-all duration-300" data-size="enterprise">
+                                    <div class="font-semibold text-lg mb-2">Enterprise</div>
+                                    <div class="text-sm text-gray-400">500+ people</div>
+                                    <div class="text-xs text-cyan-400 mt-2">$500K+ range</div>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-morphism p-8 rounded-3xl">
+                            <label class="block text-white font-bold mb-6 flex items-center text-lg">
+                                <div class="w-10 h-10 bg-gradient-to-r from-green-400 to-emerald-500 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-shield-alt text-white"></i>
+                                </div>
+                                Current Security Level
+                            </label>
                             <div class="space-y-4">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-cyber-white/70">Active Threats:</span>
-                                    <span class="text-strategic-red font-bold text-xl">47</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-cyber-white/70">Grant Score Boost:</span>
-                                    <span class="text-gold-accent font-bold text-xl">+127 pts</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-cyber-white/70">Coverage Area:</span>
-                                    <span class="text-accent-purple font-bold text-xl">NY State</span>
-                                </div>
-                                <div class="mt-6 p-4 bg-strategic-red/10 rounded-xl">
-                                    <p class="text-sm text-cyber-white/80">
-                                        <i class="fas fa-exclamation-triangle text-strategic-red mr-2"></i>
-                                        <strong>Alert:</strong> High threat activity in Brooklyn area. 
-                                        This increases grant scoring by +15 points.
-                                    </p>
-                                </div>
+                                <label class="flex items-center p-4 glass-morphism rounded-xl hover:bg-white/10 transition-colors cursor-pointer">
+                                    <input type="checkbox" class="security-checkbox mr-4 w-5 h-5 text-cyan-400 bg-transparent border-2 border-gray-400 rounded focus:ring-cyan-400" data-security="cameras">
+                                    <div class="flex-1">
+                                        <div class="font-medium flex items-center">
+                                            <i class="fas fa-video text-cyan-400 mr-3"></i>
+                                            Surveillance Cameras
+                                        </div>
+                                        <div class="text-sm text-gray-400">CCTV monitoring system with recording</div>
+                                    </div>
+                                    <div class="text-sm text-cyan-400 font-medium">+$45K</div>
+                                </label>
+                                
+                                <label class="flex items-center p-4 glass-morphism rounded-xl hover:bg-white/10 transition-colors cursor-pointer">
+                                    <input type="checkbox" class="security-checkbox mr-4 w-5 h-5 text-cyan-400 bg-transparent border-2 border-gray-400 rounded focus:ring-cyan-400" data-security="access">
+                                    <div class="flex-1">
+                                        <div class="font-medium flex items-center">
+                                            <i class="fas fa-door-closed text-green-400 mr-3"></i>
+                                            Access Control System
+                                        </div>
+                                        <div class="text-sm text-gray-400">Keycard/biometric entry system</div>
+                                    </div>
+                                    <div class="text-sm text-green-400 font-medium">+$35K</div>
+                                </label>
+                                
+                                <label class="flex items-center p-4 glass-morphism rounded-xl hover:bg-white/10 transition-colors cursor-pointer">
+                                    <input type="checkbox" class="security-checkbox mr-4 w-5 h-5 text-cyan-400 bg-transparent border-2 border-gray-400 rounded focus:ring-cyan-400" data-security="personnel">
+                                    <div class="flex-1">
+                                        <div class="font-medium flex items-center">
+                                            <i class="fas fa-user-shield text-purple-400 mr-3"></i>
+                                            Security Personnel
+                                        </div>
+                                        <div class="text-sm text-gray-400">On-site trained security staff</div>
+                                    </div>
+                                    <div class="text-sm text-purple-400 font-medium">+$25K</div>
+                                </label>
+                                
+                                <label class="flex items-center p-4 glass-morphism rounded-xl hover:bg-white/10 transition-colors cursor-pointer">
+                                    <input type="checkbox" class="security-checkbox mr-4 w-5 h-5 text-cyan-400 bg-transparent border-2 border-gray-400 rounded focus:ring-cyan-400" data-security="barriers">
+                                    <div class="flex-1">
+                                        <div class="font-medium flex items-center">
+                                            <i class="fas fa-shield text-orange-400 mr-3"></i>
+                                            Perimeter Barriers
+                                        </div>
+                                        <div class="text-sm text-gray-400">Fencing, bollards, security barriers</div>
+                                    </div>
+                                    <div class="text-sm text-orange-400 font-medium">+$55K</div>
+                                </label>
                             </div>
                         </div>
                         
-                        <div class="glass-card rounded-2xl p-6">
-                            <h4 class="text-lg font-bold text-gold-accent mb-4">
-                                <i class="fas fa-map-marked-alt mr-2"></i>Regional Performance
-                            </h4>
-                            <div class="space-y-3">
-                                <div class="flex justify-between">
-                                    <span class="text-sm">NYC Metro</span>
-                                    <div class="flex items-center space-x-2">
-                                        <div class="w-16 h-2 bg-deep-navy rounded-full overflow-hidden">
-                                            <div class="w-4/5 h-full bg-gold-accent rounded-full"></div>
-                                        </div>
-                                        <span class="text-xs text-gold-accent">98%</span>
-                                    </div>
+                        <div class="glass-morphism p-8 rounded-3xl">
+                            <label class="block text-white font-bold mb-6 flex items-center text-lg">
+                                <div class="w-10 h-10 bg-gradient-to-r from-red-400 to-pink-500 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
                                 </div>
-                                <div class="flex justify-between">
-                                    <span class="text-sm">Central NY</span>
-                                    <div class="flex items-center space-x-2">
-                                        <div class="w-16 h-2 bg-deep-navy rounded-full overflow-hidden">
-                                            <div class="w-4/5 h-full bg-accent-purple rounded-full"></div>
-                                        </div>
-                                        <span class="text-xs text-accent-purple">95%</span>
+                                Location Risk Assessment
+                            </label>
+                            <div class="grid grid-cols-1 gap-4">
+                                <button class="risk-btn p-6 bg-red-500/10 border border-red-500/30 rounded-2xl hover:bg-red-500/20 transition-colors text-left" data-risk="high">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="font-semibold text-red-400 text-lg">High Risk Area</div>
+                                        <div class="badge badge-danger">Critical</div>
                                     </div>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-sm">Western NY</span>
-                                    <div class="flex items-center space-x-2">
-                                        <div class="w-16 h-2 bg-deep-navy rounded-full overflow-hidden">
-                                            <div class="w-3/4 h-full bg-strategic-red rounded-full"></div>
-                                        </div>
-                                        <span class="text-xs text-strategic-red">94%</span>
+                                    <div class="text-sm text-gray-400 mb-2">Urban center, previous incidents, elevated threat level</div>
+                                    <div class="text-sm text-red-400 font-medium">Funding multiplier: 1.5x</div>
+                                </button>
+                                
+                                <button class="risk-btn p-6 bg-orange-500/10 border border-orange-500/30 rounded-2xl hover:bg-orange-500/20 transition-colors text-left" data-risk="medium">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="font-semibold text-orange-400 text-lg">Medium Risk Area</div>
+                                        <div class="badge badge-warning">Moderate</div>
                                     </div>
-                                </div>
+                                    <div class="text-sm text-gray-400 mb-2">Suburban area, moderate threat level, some incidents</div>
+                                    <div class="text-sm text-orange-400 font-medium">Funding multiplier: 1.2x</div>
+                                </button>
+                                
+                                <button class="risk-btn p-6 bg-green-500/10 border border-green-500/30 rounded-2xl hover:bg-green-500/20 transition-colors text-left" data-risk="low">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="font-semibold text-green-400 text-lg">Low Risk Area</div>
+                                        <div class="badge badge-success">Safe</div>
+                                    </div>
+                                    <div class="text-sm text-gray-400 mb-2">Rural area, minimal threat history, low incident rate</div>
+                                    <div class="text-sm text-green-400 font-medium">Funding multiplier: 1.0x</div>
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Luxury AI Grant Calculator -->
-    <section id="calculator" class="py-24 bg-gradient-to-b from-deep-navy to-glass-blue">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <h2 class="text-6xl font-black mb-8 glow-text">AI Grant Calculator</h2>
-                <p class="text-xl text-cyber-white/70 max-w-3xl mx-auto">
-                    Advanced machine learning algorithms analyze your organization's profile to predict optimal grant opportunities
-                </p>
-            </div>
-            
-            <div class="calculator-container rounded-3xl p-10">
-                <div id="calculator-interface" class="space-y-8">
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-lg font-semibold mb-4 text-gold-accent">
-                                    <i class="fas fa-building mr-2"></i>Organization Type
-                                </label>
-                                <select class="w-full luxury-input rounded-xl p-4 text-cyber-white">
-                                    <option>Select organization type</option>
-                                    <option>Synagogue/Temple</option>
-                                    <option>Jewish School/Yeshiva</option>
-                                    <option>Community Center</option>
-                                    <option>Healthcare Facility</option>
-                                    <option>Other Nonprofit</option>
-                                </select>
+                    
+                    <!-- Perfect Results Section -->
+                    <div class="space-y-8">
+                        <div class="glass-premium p-10 rounded-3xl" id="results-panel">
+                            <div class="text-center mb-8">
+                                <div class="badge badge-primary mb-4">
+                                    <i class="fas fa-brain mr-2"></i>
+                                    AI Analysis Complete
+                                </div>
+                                <h3 class="text-3xl font-bold mb-4 text-gradient">
+                                    Intelligent Grant Estimate
+                                </h3>
                             </div>
                             
-                            <div>
-                                <label class="block text-lg font-semibold mb-4 text-gold-accent">
-                                    <i class="fas fa-exclamation-triangle mr-2"></i>Security Incidents (3 years)
-                                </label>
-                                <div class="relative">
-                                    <input type="range" min="0" max="15" value="2" class="w-full luxury-slider" id="incidents-slider" oninput="updateSliderValue('incidents', this.value)">
-                                    <div class="flex justify-between text-sm text-cyber-white/60 mt-2">
-                                        <span>0</span>
-                                        <span id="incidents-value" class="text-gold-accent font-bold text-lg">2</span>
-                                        <span>15+</span>
+                            <div class="text-center mb-10">
+                                <div class="text-6xl font-black text-gradient-gold mb-4" id="grant-range">$130,000–$185,000</div>
+                                <div class="text-gray-400 mb-4 text-lg">Projected funding range based on AI analysis</div>
+                                <div class="flex justify-center">
+                                    <div class="bg-green-500/20 text-green-400 px-6 py-3 rounded-full font-medium border border-green-500/30">
+                                        <i class="fas fa-check-circle mr-2"></i>
+                                        <span id="success-probability">89.3%</span> Success Probability
                                     </div>
                                 </div>
                             </div>
                             
-                            <div>
-                                <label class="block text-lg font-semibold mb-4 text-gold-accent">
-                                    <i class="fas fa-dollar-sign mr-2"></i>Annual Budget Range
-                                </label>
-                                <select class="w-full luxury-input rounded-xl p-4 text-cyber-white">
-                                    <option>Select budget range</option>
-                                    <option>Under $250,000</option>
-                                    <option>$250,000 - $500,000</option>
-                                    <option>$500,000 - $1,000,000</option>
-                                    <option>$1,000,000 - $5,000,000</option>
-                                    <option>Over $5,000,000</option>
-                                </select>
+                            <div class="space-y-4 mb-10" id="funding-breakdown">
+                                <div class="flex justify-between items-center p-5 glass-morphism rounded-2xl">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-xl flex items-center justify-center mr-4">
+                                            <i class="fas fa-video text-white"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Surveillance System</div>
+                                            <div class="text-sm text-gray-400">AI-powered CCTV with analytics</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-cyan-400 font-bold text-xl">$45,000</div>
+                                        <div class="text-xs text-gray-400">High priority</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center p-5 glass-morphism rounded-2xl">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-xl flex items-center justify-center mr-4">
+                                            <i class="fas fa-door-closed text-white"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Access Control</div>
+                                            <div class="text-sm text-gray-400">Biometric entry system</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-green-400 font-bold text-xl">$35,000</div>
+                                        <div class="text-xs text-gray-400">Recommended</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center p-5 glass-morphism rounded-2xl">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-violet-500 rounded-xl flex items-center justify-center mr-4">
+                                            <i class="fas fa-shield-alt text-white"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Perimeter Security</div>
+                                            <div class="text-sm text-gray-400">Barriers and detection systems</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-purple-400 font-bold text-xl">$55,000</div>
+                                        <div class="text-xs text-gray-400">Essential</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center p-5 glass-morphism rounded-2xl">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-xl flex items-center justify-center mr-4">
+                                            <i class="fas fa-graduation-cap text-white"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Training & Consulting</div>
+                                            <div class="text-sm text-gray-400">Security protocols and staff training</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-orange-400 font-bold text-xl">$25,000</div>
+                                        <div class="text-xs text-gray-400">Included</div>
+                                    </div>
+                                </div>
+                                
+                                <hr class="border-white/20 my-6">
+                                
+                                <div class="flex justify-between items-center p-6 bg-gradient-to-r from-cyan-400/10 to-purple-500/10 rounded-2xl border border-cyan-400/30">
+                                    <div>
+                                        <div class="font-bold text-xl">Total Potential Funding</div>
+                                        <div class="text-sm text-gray-400">Based on AI analysis and risk assessment</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-gradient-gold font-black text-3xl" id="total-funding">$160,000</div>
+                                        <div class="text-sm text-cyan-400">96.8% confidence</div>
+                                    </div>
+                                </div>
                             </div>
+                            
+                            <button class="btn-primary w-full py-5 rounded-2xl text-lg font-bold flex items-center justify-center">
+                                <i class="fas fa-rocket mr-3"></i>
+                                Start Full AI Application Process
+                                <i class="fas fa-arrow-right ml-3"></i>
+                            </button>
                         </div>
                         
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-lg font-semibold mb-4 text-gold-accent">
-                                    <i class="fas fa-shield-alt mr-2"></i>Current Security Level
-                                </label>
-                                <div class="space-y-3">
-                                    <label class="flex items-center glass-card p-4 rounded-lg cursor-pointer hover:bg-gold-accent/10 transition-all">
-                                        <input type="radio" name="security" class="mr-3 text-gold-accent">
-                                        <i class="fas fa-video text-gold-accent mr-3"></i>
-                                        <span>Basic (cameras, locks)</span>
-                                    </label>
-                                    <label class="flex items-center glass-card p-4 rounded-lg cursor-pointer hover:bg-gold-accent/10 transition-all">
-                                        <input type="radio" name="security" class="mr-3 text-gold-accent">
-                                        <i class="fas fa-key text-gold-accent mr-3"></i>
-                                        <span>Intermediate (access control)</span>
-                                    </label>
-                                    <label class="flex items-center glass-card p-4 rounded-lg cursor-pointer hover:bg-gold-accent/10 transition-all">
-                                        <input type="radio" name="security" class="mr-3 text-gold-accent">
-                                        <i class="fas fa-network-wired text-gold-accent mr-3"></i>
-                                        <span>Advanced (integrated systems)</span>
-                                    </label>
+                        <!-- Perfect AI Insights Panel -->
+                        <div class="glass-morphism p-8 rounded-3xl">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-lightbulb text-white"></i>
                                 </div>
+                                <h4 class="text-xl font-bold">AI Optimization Insights</h4>
                             </div>
                             
-                            <div>
-                                <label class="block text-lg font-semibold mb-4 text-gold-accent">
-                                    <i class="fas fa-list-check mr-2"></i>Priority Upgrades
-                                </label>
-                                <div class="grid grid-cols-2 gap-3">
-                                    <label class="flex items-center glass-card p-3 rounded-lg cursor-pointer hover:bg-gold-accent/10 transition-all">
-                                        <label class="luxury-checkbox mr-3">
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <i class="fas fa-video text-gold-accent mr-2"></i>
-                                        <span class="text-sm">Cameras</span>
-                                    </label>
-                                    <label class="flex items-center glass-card p-3 rounded-lg cursor-pointer hover:bg-gold-accent/10 transition-all">
-                                        <label class="luxury-checkbox mr-3">
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <i class="fas fa-road-barrier text-gold-accent mr-2"></i>
-                                        <span class="text-sm">Barriers</span>
-                                    </label>
-                                    <label class="flex items-center glass-card p-3 rounded-lg cursor-pointer hover:bg-gold-accent/10 transition-all">
-                                        <label class="luxury-checkbox mr-3">
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <i class="fas fa-bell text-gold-accent mr-2"></i>
-                                        <span class="text-sm">Alarms</span>
-                                    </label>
-                                    <label class="flex items-center glass-card p-3 rounded-lg cursor-pointer hover:bg-gold-accent/10 transition-all">
-                                        <label class="luxury-checkbox mr-3">
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <i class="fas fa-graduation-cap text-gold-accent mr-2"></i>
-                                        <span class="text-sm">Training</span>
-                                    </label>
+                            <div class="space-y-4" id="ai-insights">
+                                <div class="p-4 bg-blue-500/10 rounded-xl border-l-4 border-blue-500">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="font-medium text-blue-400">Recommendation</div>
+                                        <div class="badge badge-primary">High Impact</div>
+                                    </div>
+                                    <div class="text-sm text-gray-400">Adding perimeter barriers could increase funding by $25,000 and improve success probability by 12%</div>
+                                </div>
+                                
+                                <div class="p-4 bg-green-500/10 rounded-xl border-l-4 border-green-500">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="font-medium text-green-400">Opportunity</div>
+                                        <div class="badge badge-success">Time Sensitive</div>
+                                    </div>
+                                    <div class="text-sm text-gray-400">Q2 2024 federal grants show 15% higher approval rates. Submit by March 30th for optimal timing</div>
+                                </div>
+                                
+                                <div class="p-4 bg-purple-500/10 rounded-xl border-l-4 border-purple-500">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="font-medium text-purple-400">AI Prediction</div>
+                                        <div class="badge badge-primary">Neural Analysis</div>
+                                    </div>
+                                    <div class="text-sm text-gray-400">Based on threat patterns, your organization qualifies for expedited processing (14-day approval)</div>
+                                </div>
+                                
+                                <div class="p-4 bg-orange-500/10 rounded-xl border-l-4 border-orange-500">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="font-medium text-orange-400">Funding Alert</div>
+                                        <div class="badge badge-warning">Limited Time</div>
+                                    </div>
+                                    <div class="text-sm text-gray-400">$15M additional DHS funding available for religious institutions. Apply within 45 days</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <button onclick="runAICalculation()" class="w-full glass-button py-6 rounded-2xl font-bold text-xl text-gold-accent transform hover:scale-105 transition-all duration-300">
-                        <i class="fas fa-robot mr-3"></i>Run AI Analysis
-                    </button>
-                </div>
-                
-                <div id="ai-results" class="hidden mt-10 space-y-6">
-                    <div class="text-center result-card rounded-3xl p-8">
-                        <h3 class="text-3xl font-bold text-gold-accent mb-4">
-                            <i class="fas fa-check-circle mr-3"></i>AI Analysis Complete
-                        </h3>
-                        <div class="text-6xl font-black text-gold-accent mb-4">$185,000 - $275,000</div>
-                        <p class="text-cyber-white/70 text-lg">Estimated Grant Range</p>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-3 gap-6">
-                        <div class="glass-card rounded-xl p-6 text-center">
-                            <i class="fas fa-percentage text-accent-purple text-3xl mb-3"></i>
-                            <div class="text-2xl font-bold text-accent-purple mb-2">94%</div>
-                            <div class="text-sm text-cyber-white/70">Match Probability</div>
-                        </div>
-                        <div class="glass-card rounded-xl p-6 text-center">
-                            <i class="fas fa-clock text-strategic-red text-3xl mb-3"></i>
-                            <div class="text-2xl font-bold text-strategic-red mb-2">21 days</div>
-                            <div class="text-sm text-cyber-white/70">Est. Processing</div>
-                        </div>
-                        <div class="glass-card rounded-xl p-6 text-center">
-                            <i class="fas fa-award text-gold-accent text-3xl mb-3"></i>
-                            <div class="text-2xl font-bold text-gold-accent mb-2">NSGP</div>
-                            <div class="text-sm text-cyber-white/70">Best Program</div>
-                        </div>
-                    </div>
-                    
-                    <div class="glass-card rounded-xl p-6">
-                        <h4 class="text-lg font-bold text-gold-accent mb-4">
-                            <i class="fas fa-bullseye mr-2"></i>AI Recommendations
-                        </h4>
-                        <ul class="space-y-2 text-cyber-white/80">
-                            <li><i class="fas fa-arrow-right text-gold-accent mr-2"></i>Apply for NSGP 2024 by March 15th deadline</li>
-                            <li><i class="fas fa-arrow-right text-gold-accent mr-2"></i>Include security assessment from certified provider</li>
-                            <li><i class="fas fa-arrow-right text-gold-accent mr-2"></i>Emphasize community impact and vulnerability factors</li>
-                            <li><i class="fas fa-arrow-right text-gold-accent mr-2"></i>Budget 15% for training and maintenance</li>
-                        </ul>
-                    </div>
-                    
-                    <button class="w-full glass-button py-4 rounded-xl font-bold text-lg text-gold-accent">
-                        <i class="fas fa-rocket mr-2"></i>Start Application Process
-                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Success Stories -->
-    <section id="success" class="py-24 neural-bg overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
+    <!-- Perfect Success Stories -->
+    <section id="success" class="py-32 relative">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-20">
-                <h2 class="text-6xl font-black mb-8 glow-text">Success Intelligence</h2>
-                <p class="text-xl text-cyber-white/70">Real-time success metrics powered by AI</p>
-            </div>
-            
-            <!-- Enhanced Success Ticker -->
-            <div class="glass-morphism rounded-2xl py-6 mb-16 overflow-hidden">
-                <div class="success-ticker whitespace-nowrap text-xl font-bold">
-                    <i class="fas fa-trophy text-gold-accent mr-2"></i>Temple Beth David: $347,000 secured • 
-                    <i class="fas fa-trophy text-gold-accent mr-2"></i>Yeshiva of Brooklyn: $289,000 approved • 
-                    <i class="fas fa-trophy text-gold-accent mr-2"></i>JCC Manhattan: $425,000 granted • 
-                    <i class="fas fa-trophy text-gold-accent mr-2"></i>Chabad of Queens: $198,000 funded • 
-                    <i class="fas fa-trophy text-gold-accent mr-2"></i>Albany Jewish Center: $356,000 awarded •
+                <div class="badge badge-success mb-6">
+                    <i class="fas fa-trophy mr-2"></i>
+                    Success Stories
                 </div>
-            </div>
-            
-            <!-- Premium Testimonials -->
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all duration-300">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 glass-button rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-gold-accent text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gold-accent text-lg">Rabbi Sarah Cohen</h4>
-                            <p class="text-cyber-white/60">Temple Beth Shalom, NYC</p>
-                        </div>
-                    </div>
-                    <p class="text-cyber-white/80 mb-6 leading-relaxed">
-                        "The AI analysis was incredibly accurate. Fortress Grants predicted our exact funding amount and timeline. Their technology is revolutionary."
-                    </p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-gold-accent font-bold text-xl">$285,000</div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all duration-300">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 glass-button rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-gold-accent text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gold-accent text-lg">David Levy</h4>
-                            <p class="text-cyber-white/60">Westchester Academy</p>
-                        </div>
-                    </div>
-                    <p class="text-cyber-white/80 mb-6 leading-relaxed">
-                        "From application to approval in just 19 days. Their AI platform streamlined everything and their expertise is unmatched."
-                    </p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-gold-accent font-bold text-xl">$225,000</div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all duration-300">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 glass-button rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-gold-accent text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gold-accent text-lg">Maria Goldstein</h4>
-                            <p class="text-cyber-white/60">JCC Manhattan</p>
-                        </div>
-                    </div>
-                    <p class="text-cyber-white/80 mb-6 leading-relaxed">
-                        "The real-time tracking and AI insights gave us complete confidence throughout the process. Exceptional results."
-                    </p>
-                    <div class="flex justify-between items-center">
-                        <div class="text-gold-accent font-bold text-xl">$340,000</div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Expert Services Platform -->
-    <section id="platform" class="py-24 bg-gradient-to-b from-glass-blue to-deep-navy">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <h2 class="text-6xl font-black mb-8 glow-text">Expert Services Platform</h2>
-                <p class="text-xl text-cyber-white/70">Human intelligence meets cutting-edge technology</p>
-            </div>
-            
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all duration-300" style="transform-style: preserve-3d; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);">
-                    <div class="text-center">
-                        <div class="text-6xl mb-6">
-                            <i class="fas fa-users text-gold-accent"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gold-accent mb-4">Expert Writing Team</h3>
-                        <p class="text-cyber-white/70 mb-6">Former federal analysts craft winning applications</p>
-                        <ul class="text-cyber-white/80 space-y-3 text-left">
-                            <li><i class="fas fa-pen-fancy text-gold-accent mr-2"></i>Professional grant writers</li>
-                            <li><i class="fas fa-medal text-gold-accent mr-2"></i>Former DHS/FEMA experts</li>
-                            <li><i class="fas fa-target text-gold-accent mr-2"></i>Tailored narratives</li>
-                            <li><i class="fas fa-clipboard-check text-gold-accent mr-2"></i>Compliance review</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all duration-300" style="transform-style: preserve-3d; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);">
-                    <div class="text-center">
-                        <div class="text-6xl mb-6">
-                            <i class="fas fa-search text-gold-accent"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gold-accent mb-4">Intelligence Research</h3>
-                        <p class="text-cyber-white/70 mb-6">Deep analysis of funding opportunities and requirements</p>
-                        <ul class="text-cyber-white/80 space-y-3 text-left">
-                            <li><i class="fas fa-database text-gold-accent mr-2"></i>Comprehensive database</li>
-                            <li><i class="fas fa-chart-line text-gold-accent mr-2"></i>Trend analysis</li>
-                            <li><i class="fas fa-bullseye text-gold-accent mr-2"></i>Strategic positioning</li>
-                            <li><i class="fas fa-clock text-gold-accent mr-2"></i>Deadline management</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all duration-300" style="transform-style: preserve-3d; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);">
-                    <div class="text-center">
-                        <div class="text-6xl mb-6">
-                            <i class="fas fa-handshake text-gold-accent"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gold-accent mb-4">Personal Consultation</h3>
-                        <p class="text-cyber-white/70 mb-6">One-on-one guidance from security funding experts</p>
-                        <ul class="text-cyber-white/80 space-y-3 text-left">
-                            <li><i class="fas fa-phone text-gold-accent mr-2"></i>Direct expert access</li>
-                            <li><i class="fas fa-calendar text-gold-accent mr-2"></i>Strategic planning</li>
-                            <li><i class="fas fa-shield-alt text-gold-accent mr-2"></i>Security assessments</li>
-                            <li><i class="fas fa-trophy text-gold-accent mr-2"></i>Success optimization</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Expert Team -->
-    <section id="team" class="py-24 neural-bg">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <h2 class="text-6xl font-black mb-8 glow-text">Expert Intelligence Team</h2>
-                <p class="text-xl text-cyber-white/70">Former federal analysts and AI specialists</p>
-            </div>
-            
-            <div class="grid lg:grid-cols-3 gap-12">
-                <div class="text-center glass-card rounded-2xl p-8 transform hover:scale-105 transition-all duration-300">
-                    <div class="w-32 h-32 glass-button rounded-full mx-auto mb-8 flex items-center justify-center">
-                        <i class="fas fa-user-tie text-5xl text-gold-accent"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gold-accent mb-3">Dr. Michael Rodriguez</h3>
-                    <p class="text-accent-purple font-semibold mb-4">Former DHS AI Director</p>
-                    <p class="text-cyber-white/70 leading-relaxed">
-                        Led AI initiatives at Department of Homeland Security. 20+ years in federal security programs and machine learning applications.
-                    </p>
-                    <div class="mt-6 flex justify-center space-x-4">
-                        <span class="glass-button px-3 py-1 rounded-full text-xs">AI/ML</span>
-                        <span class="glass-button px-3 py-1 rounded-full text-xs">DHS</span>
-                        <span class="glass-button px-3 py-1 rounded-full text-xs">NSGP</span>
-                    </div>
-                </div>
-                
-                <div class="text-center glass-card rounded-2xl p-8 transform hover:scale-105 transition-all duration-300">
-                    <div class="w-32 h-32 glass-button rounded-full mx-auto mb-8 flex items-center justify-center">
-                        <i class="fas fa-user-graduate text-5xl text-gold-accent"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gold-accent mb-3">Sarah Chen, PhD</h3>
-                    <p class="text-accent-purple font-semibold mb-4">AI Grant Strategist</p>
-                    <p class="text-cyber-white/70 leading-relaxed">
-                        $75M+ in AI-optimized grant successes. Former FEMA technology advisor specializing in predictive funding models.
-                    </p>
-                    <div class="mt-6 flex justify-center space-x-4">
-                        <span class="glass-button px-3 py-1 rounded-full text-xs">Strategy</span>
-                        <span class="glass-button px-3 py-1 rounded-full text-xs">FEMA</span>
-                        <span class="glass-button px-3 py-1 rounded-full text-xs">Analytics</span>
-                    </div>
-                </div>
-                
-                <div class="text-center glass-card rounded-2xl p-8 transform hover:scale-105 transition-all duration-300">
-                    <div class="w-32 h-32 glass-button rounded-full mx-auto mb-8 flex items-center justify-center">
-                        <i class="fas fa-shield-alt text-5xl text-gold-accent"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gold-accent mb-3">David Thompson</h3>
-                    <p class="text-accent-purple font-semibold mb-4">Security Intelligence Lead</p>
-                    <p class="text-cyber-white/70 leading-relaxed">
-                        Former FBI cybersecurity analyst. Specializes in threat assessment and AI-powered security solution design.
-                    </p>
-                    <div class="mt-6 flex justify-center space-x-4">
-                        <span class="glass-button px-3 py-1 rounded-full text-xs">Security</span>
-                        <span class="glass-button px-3 py-1 rounded-full text-xs">FBI</span>
-                        <span class="glass-button px-3 py-1 rounded-full text-xs">Cyber</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Immersive Consultation Section -->
-    <section id="contact" class="py-32 bg-gradient-to-t from-deep-navy via-glass-blue to-deep-navy relative overflow-hidden">
-        <div class="absolute inset-0 ai-grid opacity-20"></div>
-        
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <div class="mb-16">
-                <h2 class="text-7xl font-black mb-8 glow-text">Ready to Secure Funding?</h2>
-                <p class="text-2xl text-cyber-white/70 max-w-3xl mx-auto">
-                    Connect with our expert team and unlock your organization's grant potential
+                <h2 class="text-5xl md:text-6xl font-black text-gradient mb-8">
+                    Real Results, Real Impact
+                </h2>
+                <p class="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+                    Discover how our AI-powered platform has transformed security funding for organizations nationwide, securing millions in grants with unprecedented success rates.
                 </p>
             </div>
             
-            <!-- Immersive Consultation Button -->
-            <div class="relative">
-                <!-- Animated Rings -->
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-96 h-96 border-2 border-gold-accent/20 rounded-full animate-ping"></div>
-                    <div class="absolute w-80 h-80 border-2 border-accent-purple/20 rounded-full animate-ping" style="animation-delay: 0.5s;"></div>
-                    <div class="absolute w-64 h-64 border-2 border-strategic-red/20 rounded-full animate-ping" style="animation-delay: 1s;"></div>
+            <div class="grid lg:grid-cols-3 gap-8 mb-20">
+                <div class="testimonial-card p-10">
+                    <div class="flex items-center mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mr-6 shadow-lg">
+                            <i class="fas fa-synagogue text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-xl">Temple Beth Shalom</div>
+                            <div class="text-gray-400">Manhattan, NY</div>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-yellow-400 mr-2">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                </div>
+                                <span class="text-xs text-gray-400">5.0 Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <div class="text-4xl font-black text-gradient-gold mb-4">$285,000</div>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-white/5 rounded-lg p-3 text-center">
+                                <div class="font-bold text-green-400">18 days</div>
+                                <div class="text-gray-400">Approval time</div>
+                            </div>
+                            <div class="bg-white/5 rounded-lg p-3 text-center">
+                                <div class="font-bold text-cyan-400">96.8%</div>
+                                <div class="text-gray-400">AI confidence</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <blockquote class="text-gray-300 mb-8 text-lg leading-relaxed italic">
+                        "Fortress AI's platform identified funding opportunities we never knew existed. The automated application process was seamless, and we secured comprehensive security upgrades including advanced surveillance, access control, and perimeter barriers."
+                    </blockquote>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-semibold">Rabbi Sarah Cohen</div>
+                            <div class="text-sm text-gray-400">Senior Rabbi</div>
+                        </div>
+                        <div class="badge badge-success">
+                            <i class="fas fa-check mr-1"></i>
+                            Verified
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- Central Button -->
-                <button onclick="requestConsultation()" class="relative z-10 group">
-                    <div class="w-48 h-48 glass-button rounded-full flex flex-col items-center justify-center transform hover:scale-110 transition-all duration-500 shadow-2xl">
-                        <div class="text-5xl mb-4 group-hover:animate-bounce">
-                            <i class="fas fa-rocket text-gold-accent"></i>
+                <div class="testimonial-card p-10">
+                    <div class="flex items-center mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center mr-6 shadow-lg">
+                            <i class="fas fa-church text-white text-2xl"></i>
                         </div>
-                        <div class="text-xl font-bold text-gold-accent group-hover:text-cyber-white transition-colors">
-                            Request<br/>Consultation
+                        <div>
+                            <div class="font-bold text-xl">St. Michael's Cathedral</div>
+                            <div class="text-gray-400">Brooklyn, NY</div>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-yellow-400 mr-2">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                </div>
+                                <span class="text-xs text-gray-400">5.0 Rating</span>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Floating Elements -->
-                    <div class="absolute -top-8 -left-8 glass-card rounded-xl p-3 floating-3d">
-                        <div class="text-sm text-gold-accent font-bold">$47.2M+</div>
-                        <div class="text-xs text-cyber-white/60">Secured</div>
+                    <div class="mb-8">
+                        <div class="text-4xl font-black text-gradient-gold mb-4">$195,000</div>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-white/5 rounded-lg p-3 text-center">
+                                <div class="font-bold text-green-400">12 days</div>
+                                <div class="text-gray-400">Approval time</div>
+                            </div>
+                            <div class="bg-white/5 rounded-lg p-3 text-center">
+                                <div class="font-bold text-cyan-400">94.2%</div>
+                                <div class="text-gray-400">AI confidence</div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="absolute -top-8 -right-8 glass-card rounded-xl p-3 floating-3d" style="animation-delay: 1s;">
-                        <div class="text-sm text-accent-purple font-bold">96.8%</div>
-                        <div class="text-xs text-cyber-white/60">Success</div>
+                    <blockquote class="text-gray-300 mb-8 text-lg leading-relaxed italic">
+                        "The AI threat analysis was incredibly detailed and helped us understand our vulnerabilities. The platform prioritized our security investments perfectly, and the grant approval came faster than we ever expected."
+                    </blockquote>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-semibold">Father Michael O'Brien</div>
+                            <div class="text-sm text-gray-400">Parish Priest</div>
+                        </div>
+                        <div class="badge badge-success">
+                            <i class="fas fa-check mr-1"></i>
+                            Verified
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-10">
+                    <div class="flex items-center mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-teal-500 rounded-2xl flex items-center justify-center mr-6 shadow-lg">
+                            <i class="fas fa-mosque text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-xl">Islamic Center of Queens</div>
+                            <div class="text-gray-400">Queens, NY</div>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-yellow-400 mr-2">
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                    <i class="fas fa-star text-sm"></i>
+                                </div>
+                                <span class="text-xs text-gray-400">5.0 Rating</span>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="absolute -bottom-8 -left-8 glass-card rounded-xl p-3 floating-3d" style="animation-delay: 2s;">
-                        <div class="text-sm text-strategic-red font-bold">24/7</div>
-                        <div class="text-xs text-cyber-white/60">Support</div>
+                    <div class="mb-8">
+                        <div class="text-4xl font-black text-gradient-gold mb-4">$340,000</div>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-white/5 rounded-lg p-3 text-center">
+                                <div class="font-bold text-green-400">19 days</div>
+                                <div class="text-gray-400">Approval time</div>
+                            </div>
+                            <div class="bg-white/5 rounded-lg p-3 text-center">
+                                <div class="font-bold text-cyan-400">98.1%</div>
+                                <div class="text-gray-400">AI confidence</div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="absolute -bottom-8 -right-8 glass-card rounded-xl p-3 floating-3d" style="animation-delay: 3s;">
-                        <div class="text-sm text-gold-accent font-bold">< 2hrs</div>
-                        <div class="text-xs text-cyber-white/60">Response</div>
+                    <blockquote class="text-gray-300 mb-8 text-lg leading-relaxed italic">
+                        "Outstanding service and results. The AI platform not only secured our initial grant but identified additional funding sources we hadn't considered. Our community feels significantly safer now."
+                    </blockquote>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-semibold">Imam Abdullah Hassan</div>
+                            <div class="text-sm text-gray-400">Community Leader</div>
+                        </div>
+                        <div class="badge badge-success">
+                            <i class="fas fa-check mr-1"></i>
+                            Verified
+                        </div>
                     </div>
-                </button>
+                </div>
             </div>
             
-            <!-- Contact Information -->
-            <div class="mt-20 grid md:grid-cols-3 gap-8">
-                <div class="glass-card rounded-xl p-6 text-center">
-                    <div class="w-16 h-16 glass-button rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-phone text-gold-accent text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-gold-accent mb-2">Expert Hotline</h4>
-                    <p class="text-cyber-white/70">(555) AI-GRANT</p>
+            <!-- Perfect Success Metrics -->
+            <div class="glass-premium p-12 rounded-3xl">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold text-gradient mb-4">Platform Performance Metrics</h3>
+                    <p class="text-gray-400 text-lg">Real-time statistics from our AI-powered grant platform</p>
                 </div>
                 
-                <div class="glass-card rounded-xl p-6 text-center">
-                    <div class="w-16 h-16 glass-button rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-envelope text-gold-accent text-2xl"></i>
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-dollar-sign text-white text-2xl"></i>
+                        </div>
+                        <div class="text-4xl font-black text-gradient-gold mb-2">$47.2M</div>
+                        <div class="text-gray-400 font-medium">Total Funding Secured</div>
+                        <div class="text-sm text-green-400 mt-2">↗ +23% this quarter</div>
                     </div>
-                    <h4 class="font-bold text-gold-accent mb-2">Secure Email</h4>
-                    <p class="text-cyber-white/70">experts@fortressgrants.com</p>
-                </div>
-                
-                <div class="glass-card rounded-xl p-6 text-center">
-                    <div class="w-16 h-16 glass-button rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-building text-gold-accent text-2xl"></i>
+                    
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-building text-white text-2xl"></i>
+                        </div>
+                        <div class="text-4xl font-black text-gradient mb-2">312</div>
+                        <div class="text-gray-400 font-medium">Organizations Protected</div>
+                        <div class="text-sm text-cyan-400 mt-2">Active clients</div>
                     </div>
-                    <h4 class="font-bold text-gold-accent mb-2">Manhattan HQ</h4>
-                    <p class="text-cyber-white/70">One World Trade Center</p>
+                    
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-gradient-to-r from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-white text-2xl"></i>
+                        </div>
+                        <div class="text-4xl font-black text-gradient mb-2">96.8%</div>
+                        <div class="text-gray-400 font-medium">Success Rate</div>
+                        <div class="text-sm text-green-400 mt-2">Industry leading</div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-gradient-to-r from-purple-400 to-violet-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-clock text-white text-2xl"></i>
+                        </div>
+                        <div class="text-4xl font-black text-gradient mb-2">16</div>
+                        <div class="text-gray-400 font-medium">Average Days to Approval</div>
+                        <div class="text-sm text-purple-400 mt-2">AI-accelerated</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- AI Assistant -->
-    <div id="ai-assistant" class="fixed bottom-8 right-8 z-50">
-        <button onclick="toggleAIChat()" class="ai-assistant w-20 h-20 rounded-full flex items-center justify-center shadow-2xl transform hover:scale-110 transition-all duration-300">
-            <i class="fas fa-robot text-3xl text-deep-navy"></i>
-        </button>
-        
-        <div id="ai-chat-window" class="hidden absolute bottom-24 right-0 w-96 h-[500px] glass-card rounded-2xl shadow-2xl">
-            <div class="bg-gradient-to-r from-gold-accent to-accent-purple text-deep-navy p-6 rounded-t-2xl">
-                <h4 class="font-bold text-lg">
-                    <i class="fas fa-robot mr-2"></i>Fortress AI Assistant
-                </h4>
-                <p class="text-sm opacity-80">Powered by advanced grant intelligence</p>
+    <!-- Perfect Pricing Section -->
+    <section id="pricing" class="py-32 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <div class="badge badge-primary mb-6">
+                    <i class="fas fa-tags mr-2"></i>
+                    Transparent Pricing
+                </div>
+                <h2 class="text-5xl md:text-6xl font-black text-gradient mb-8">
+                    AI-Powered Investment Plans
+                </h2>
+                <p class="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+                    Choose the perfect plan for your organization. All plans include our advanced AI grant optimization, 24/7 threat monitoring, and success guarantee.
+                </p>
             </div>
-            <div class="p-6 h-80 overflow-y-auto">
-                <div class="glass-card rounded-xl p-4 mb-4">
-                    <p class="text-sm text-cyber-white mb-3">
-                        <i class="fas fa-hand-wave mr-2"></i>Hello! I'm your AI grant specialist. I can help with:
-                    </p>
-                    <div class="grid grid-cols-2 gap-2 text-xs">
-                        <div class="glass-button p-2 rounded-lg text-center cursor-pointer hover:bg-gold-accent/20">
-                            <i class="fas fa-check-circle mr-1"></i>Eligibility Check
+            
+            <div class="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <div class="pricing-card p-10">
+                    <div class="text-center mb-10">
+                        <div class="w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-rocket text-white text-2xl"></i>
                         </div>
-                        <div class="glass-button p-2 rounded-lg text-center cursor-pointer hover:bg-gold-accent/20">
-                            <i class="fas fa-search mr-1"></i>Grant Search
+                        <h3 class="text-2xl font-bold mb-4">Starter</h3>
+                        <p class="text-gray-400 mb-8">Perfect for small organizations getting started</p>
+                        <div class="text-5xl font-black text-gradient mb-4">$2,999</div>
+                        <div class="text-gray-400">per application</div>
+                        <div class="text-sm text-cyan-400 mt-2">No setup fees</div>
+                    </div>
+                    
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span>AI Grant Analysis & Optimization</span>
                         </div>
-                        <div class="glass-button p-2 rounded-lg text-center cursor-pointer hover:bg-gold-accent/20">
-                            <i class="fas fa-calendar mr-1"></i>Timeline Planning
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span>Basic Threat Assessment</span>
                         </div>
-                        <div class="glass-button p-2 rounded-lg text-center cursor-pointer hover:bg-gold-accent/20">
-                            <i class="fas fa-chart-line mr-1"></i>Success Prediction
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span>Professional Application Writing</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span>Email Support (48hr response)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span>Success Guarantee</span>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="p-6 border-t border-gold-accent/20">
-                <div class="flex space-x-3">
-                    <input type="text" placeholder="Ask about grants, eligibility, or funding..." class="flex-1 premium-input rounded-xl p-3 text-sm text-cyber-white">
-                    <button class="glass-button px-6 py-3 rounded-xl text-sm font-bold text-gold-accent">
-                        <i class="fas fa-paper-plane"></i>
+                    
+                    <button class="btn-secondary w-full py-4 rounded-xl font-bold text-lg">
+                        Get Started
                     </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-deep-navy border-t border-gold-accent/20 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-5 gap-12">
-                <div class="lg:col-span-2">
-                    <div class="flex items-center space-x-4 mb-6">
-                        <div class="w-12 h-12 glass-button rounded-xl flex items-center justify-center">
-                            <i class="fas fa-shield-alt text-2xl text-gold-accent"></i>
-                        </div>
-                        <div>
-                            <span class="text-2xl font-bold glow-text">Fortress Grants</span>
-                            <p class="text-cyber-white/60 text-sm">AI-Powered Security Grant Solutions</p>
-                        </div>
-                    </div>
-                    <p class="text-cyber-white/70 leading-relaxed mb-6">
-                        Revolutionary artificial intelligence meets expert grant writing to maximize your organization's security funding potential.
-                    </p>
-                    <div class="flex space-x-4">
-                        <div class="glass-button w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer">
-                            <i class="fas fa-envelope text-gold-accent"></i>
-                        </div>
-                        <div class="glass-button w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer">
-                            <i class="fab fa-linkedin text-gold-accent"></i>
-                        </div>
-                        <div class="glass-button w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer">
-                            <i class="fab fa-twitter text-gold-accent"></i>
-                        </div>
+                    
+                    <div class="mt-6 text-center">
+                        <div class="text-sm text-gray-400">Average funding secured:</div>
+                        <div class="text-lg font-bold text-cyan-400">$150,000</div>
                     </div>
                 </div>
                 
-                <div>
-                    <h5 class="font-bold text-gold-accent mb-6 text-lg">AI Platform</h5>
-                    <ul class="space-y-3 text-cyber-white/70">
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">Grant Discovery</li>
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">Smart Applications</li>
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">Intelligence Dashboard</li>
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">Success Analytics</li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h5 class="font-bold text-gold-accent mb-6 text-lg">Resources</h5>
-                    <ul class="space-y-3 text-cyber-white/70">
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">NSGP Guidelines</li>
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">Success Stories</li>
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">AI Calculator</li>
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">Knowledge Base</li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h5 class="font-bold text-gold-accent mb-6 text-lg">Intelligence</h5>
-                    <ul class="space-y-3 text-cyber-white/70">
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">Live Monitoring</li>
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">Threat Analysis</li>
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">Market Intelligence</li>
-                        <li class="hover:text-gold-accent cursor-pointer transition-colors">API Access</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gold-accent/20 mt-12 pt-8">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-cyber-white/60 text-sm">
-                        © 2024 Fortress Grants AI. All rights reserved. | SOC 2 Compliant | FEMA Certified
-                    </p>
-                    <div class="flex space-x-6 mt-4 md:mt-0 text-sm text-cyber-white/60">
-                        <a href="#" class="hover:text-gold-accent transition-colors">Privacy Policy</a>
-                        <a href="#" class="hover:text-gold-accent transition-colors">Terms of Service</a>
-                        <a href="#" class="hover:text-gold-accent transition-colors">Security</a>
+                <div class="pricing-card featured p-10 relative">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                        <div class="bg-gradient-to-r from-cyan-400 to-purple-500 text-white px-8 py-3 rounded-full font-bold shadow-lg">
+                            <i class="fas fa-crown mr-2"></i>
+                            Most Popular
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Enhanced Threat Visualization Interactions
-        function showThreatDetails(incident, location, severity, points) {
-            const detailsDiv = document.getElementById('threat-details');
-            const severityColor = severity === 'High' ? 'strategic-red' : severity === 'Medium' ? 'gold-accent' : 'green-400';
-            
-            detailsDiv.innerHTML = `
-                <h3 class="text-2xl font-bold text-gold-accent mb-6">
-                    <i class="fas fa-exclamation-triangle mr-3"></i>${incident}
-                </h3>
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center">
-                        <span class="text-cyber-white/70">Location:</span>
-                        <span class="text-accent-purple font-bold text-xl">${location}</span>
+                    
+                    <div class="text-center mb-10">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-400 to-violet-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-brain text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Professional</h3>
+                        <p class="text-gray-400 mb-8">Comprehensive AI-powered solution for serious organizations</p>
+                        <div class="text-5xl font-black text-gradient mb-4">$7,999</div>
+                        <div class="text-gray-400">per application</div>
+                        <div class="text-sm text-purple-400 mt-2">Best value • Most popular</div>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-cyber-white/70">Threat Level:</span>
-                        <span class="text-${severityColor} font-bold text-xl">${severity}</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-cyber-white/70">Grant Score Boost:</span>
-                        <span class="text-gold-accent font-bold text-xl">${points}</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-cyber-white/70">Status:</span>
-                        <span class="text-cyber-white">Active Monitoring</span>
-                    </div>
-                    <div class="mt-6 p-4 bg-${severityColor}/10 rounded-xl">
-                        <p class="text-sm text-cyber-white/80">
-                            <i class="fas fa-shield-alt text-${severityColor} mr-2"></i>
-                            <strong>Intelligence:</strong> This incident type increases application competitiveness and demonstrates clear security need.
-                        </p>
-                    </div>
-                    <button class="w-full glass-button py-3 rounded-xl font-semibold text-gold-accent mt-4">
-                        <i class="fas fa-chart-line mr-2"></i>View Impact Analysis
-                    </button>
-                </div>
-            `;
-        }
-        
-        // Consultation Request Function
-        function requestConsultation() {
-            const button = event.target.closest('button');
-            const originalContent = button.innerHTML;
-            
-            button.innerHTML = `
-                <div class="w-48 h-48 glass-button rounded-full flex flex-col items-center justify-center">
-                    <div class="text-5xl mb-4">
-                        <i class="fas fa-spinner fa-spin text-gold-accent"></i>
-                    </div>
-                    <div class="text-xl font-bold text-gold-accent">
-                        Connecting...
-                    </div>
-                </div>
-            `;
-            
-            setTimeout(() => {
-                alert('Consultation Request Submitted!\n\nOur expert team will contact you within 2 hours.\n\nExpected Grant Range: $185,000 - $275,000\nSuccess Probability: 94%\n\nThank you for choosing Fortress Grants!');
-                button.innerHTML = originalContent;
-            }, 2000);
-        }
-
-        // Enhanced Calculator Functions
-        function updateSliderValue(type, value) {
-            document.getElementById(type + '-value').textContent = value;
-        }
-
-        function runAICalculation() {
-            const calculatorInterface = document.getElementById('calculator-interface');
-            const aiResults = document.getElementById('ai-results');
-            
-            calculatorInterface.style.opacity = '0.5';
-            
-            // Show loading state
-            const button = calculatorInterface.querySelector('button');
-            const originalText = button.innerHTML;
-            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-3"></i>AI Processing...';
-            button.disabled = true;
-            
-            setTimeout(() => {
-                calculatorInterface.classList.add('hidden');
-                aiResults.classList.remove('hidden');
-                aiResults.classList.add('slide-up');
-                button.innerHTML = originalText;
-                button.disabled = false;
-            }, 3000);
-        }
-
-        // AI Assistant Functions
-        function toggleAIChat() {
-            const chatWindow = document.getElementById('ai-chat-window');
-            chatWindow.classList.toggle('hidden');
-        }
-
-        // Live Counter Animation
-        function animateLiveCounter() {
-            const counter = document.getElementById('live-counter');
-            if (counter) {
-                let currentValue = parseInt(counter.textContent.replace(',', ''));
-                setInterval(() => {
-                    currentValue += Math.floor(Math.random() * 3) + 1;
-                    counter.textContent = currentValue.toLocaleString();
-                }, 2000);
-            }
-        }
-
-        // Enhanced Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Form Submission with AI Processing
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const button = this.querySelector('button[type="submit"]');
-            const originalText = button.innerHTML;
-            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>AI Processing...';
-            button.disabled = true;
-            
-            setTimeout(() => {
-                button.innerHTML = '<i class="fas fa-check mr-2"></i>Assessment Complete!';
-                setTimeout(() => {
-                    alert('AI Analysis Complete!\n\nEstimated Grant Range: $185,000 - $275,000\nMatch Probability: 94%\n\nOur team will contact you within 2 hours with your detailed assessment.');
-                    button.innerHTML = originalText;
-                    button.disabled = false;
-                }, 1000);
-            }, 3000);
-        });
-
-        // Advanced Scroll Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('slide-up');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section, .glass-card').forEach(element => {
-            observer.observe(element);
-        });
-
-        // Dynamic Metrics Counter
-        function animateCounter(element, target, duration = 2000) {
-            let start = 0;
-            const increment = target / (duration / 16);
-            
-            const timer = setInterval(() => {
-                start += increment;
-                if (start >= target) {
-                    element.textContent = target.toLocaleString();
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(start).toLocaleString();
-                }
-            }, 16);
-        }
-
-        // Initialize all animations and counters
-        window.addEventListener('load', () => {
-            // Start live counter animation
-            animateLiveCounter();
-            
-            // Initialize metric counters
-            setTimeout(() => {
-                const metrics = document.querySelectorAll('.metric-counter .text-4xl');
-                metrics.forEach((metric, index) => {
-                    const values = [47200000, 96.8, 312, 24];
-                    if (index < values.length) {
-                        animateCounter(metric, values[index], 2000 + (index * 200));
-                    }
-                });
-            }, 1000);
-        });
-
-        // Add interactive hover effects to data nodes
-        document.querySelectorAll('.data-node').forEach(node => {
-            node.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(2)';
-                this.style.zIndex = '10';
-            });
-            
-            node.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-                this.style.zIndex = '1';
-            });
-        });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'962cd42ef2fa3453',t:'MTc1MzEyMzI0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>
+                    
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span>Advanced AI Analysis & Optimization</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span>Comprehensive Threat Intelligence</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span>Multi-Grant Applications (up to 3)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span>Priority Support (24hr response)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span>Success Guarantee</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'962dfa92227942e2',t:'MTc1MzEzNTMwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
