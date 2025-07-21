@@ -411,30 +411,43 @@
 </head>
 <body class="bg-deep-navy text-cyber-white font-sans overflow-x-hidden">
   <nav class="fixed top-0 w-full z-50 glass-morphism">
-    <div class="max-w-7xl mx-auto px-6 py-4">
-      <div class="flex justify-between items-center">
-        <div class="flex items-center space-x-4">
-          <div class="w-12 h-12 glass-button rounded-xl flex items-center justify-center">
-            <i class="fas fa-shield-alt text-2xl text-gold-accent"></i>
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Left Logo + Name -->
+    <div class="flex items-center space-x-4">
+      <div class="w-12 h-12 glass-button rounded-xl flex items-center justify-center">
+        <i class="fas fa-shield-alt text-2xl text-gold-accent"></i>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold glow-text">Fortress Grants</h1>
+        <div class="flex items-center space-x-2">
+          <div class="rating-stars text-xs text-yellow-400">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
           </div>
-          <div>
-            <h1 class="text-2xl font-bold glow-text">Fortress Grants</h1>
-            <div class="flex items-center space-x-2">
-              <div class="rating-stars text-xs text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <span class="text-xs text-cyber-white/60">4.9 • 500+ happy clients</span>
-            </div>
-          </div>
+          <span class="text-xs text-cyber-white/60">4.9 • 500+ happy clients</span>
         </div>
-        <!-- Right side links or buttons can go here if needed -->
       </div>
     </div>
-  </nav>
+
+    <!-- Nav Links (Desktop Only) -->
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="#platform" class="hover:text-gold-accent transition-colors font-medium">Platform</a>
+      <a href="#success" class="hover:text-gold-accent transition-colors font-medium">Success</a>
+      <a href="#calculator" class="hover:text-gold-accent transition-colors font-medium">AI Calculator</a>
+      <a href="#team" class="hover:text-gold-accent transition-colors font-medium">Experts</a>
+      <button class="glass-button px-6 py-3 rounded-xl font-semibold text-gold-accent">
+        <i class="fas fa-tachometer-alt mr-2"></i>Client Dashboard
+      </button>
+    </div>
+
+    <!-- Mobile Client Dashboard (Icon only) -->
+    <div class="block md:hidden">
+      <a href="#dashboard" class="glass-button p-3 rounded-xl">
+        <i class="fas fa-tachometer-alt text-gold-accent text-lg"></i>
+      </a>
+    </div>
+  </div>
+</nav>
+
                 <div class="hidden md:flex space-x-8">
                     <a href="#platform" class="hover:text-gold-accent transition-colors font-medium">Platform</a>
                     <a href="#success" class="hover:text-gold-accent transition-colors font-medium">Success</a>
@@ -449,7 +462,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center neural-bg overflow-hidden">
+<section class="relative min-h-screen flex items-center justify-center neural-bg overflow-hidden pt-28 sm:pt-32">
         <div class="ai-grid absolute inset-0 opacity-30"></div>
         
         <div class="text-center z-10 max-w-6xl mx-auto px-6">
