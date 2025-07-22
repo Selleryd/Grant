@@ -1243,11 +1243,28 @@
       </div>
     </div>
   </div>
-      <div class="text-center mt-6">
-  <button class="cta-alert-button px-6 py-3 rounded-lg font-semibold text-base tracking-wide transition-all duration-300">
-    <i class="fab fa-whatsapp text-green-400 text-xl""></i> Get WhatsApp & Email Alerts
-  </button>
+  <!-- Alerts CTA -->
+<div class="max-w-xl mx-auto mt-12 px-6">
+  <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-lg text-center">
+    <h3 class="text-2xl font-semibold text-white mb-3">
+      Get WhatsApp & Email Alerts
+    </h3>
+    <p class="text-gray-300 text-sm sm:text-base mb-6">
+      Stay instantly informed about threats, updates, and grant deadlines.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="https://gosellery.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold transition shadow-md">
+        <i class="fab fa-whatsapp text-xl"></i>
+        WhatsApp Alerts
+      </a>
+      <a href="https://gosellery.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-semibold transition shadow-md">
+        <i class="fas fa-envelope text-lg"></i>
+        Email Alerts
+      </a>
+    </div>
+  </div>
 </div>
+
 
 </section>
 
@@ -1426,70 +1443,69 @@
 </script>
 <section>
 
-  <!-- CTA Section -->
-<section id="contact" class="py-32 relative overflow-hidden">
-  <!-- Radar Background Effect -->
-  <div class="absolute inset-0 opacity-10">
-    <div class="radar-container absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <div class="radar-sweep"></div>
-      <div class="radar-circle radar-circle-1"></div>
-      <div class="radar-circle radar-circle-2"></div>
-      <div class="radar-circle radar-circle-3"></div>
-      <div class="radar-dot radar-dot-1"></div>
-      <div class="radar-dot radar-dot-2"></div>
-      <div class="radar-dot radar-dot-3"></div>
+<!-- CTA Section -->
+<section id="contact" class="py-32 relative overflow-hidden bg-transparent">
+  <!-- Radar & Threat Background -->
+  <div class="absolute inset-0 z-0">
+    <!-- Radar -->
+    <div class="radar-container absolute w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20">
+      <div class="radar-sweep animate-spin-slow absolute w-full h-full rounded-full border border-blue-500/30"></div>
+      <div class="radar-circle absolute w-full h-full rounded-full border border-blue-500/10"></div>
+      <div class="radar-circle absolute w-3/4 h-3/4 top-1/8 left-1/8 rounded-full border border-blue-500/10"></div>
+      <div class="radar-circle absolute w-1/2 h-1/2 top-1/4 left-1/4 rounded-full border border-blue-500/10"></div>
     </div>
+
+    <!-- Subtle Threat Blobs -->
+    <div class="absolute w-full h-full">
+      <div class="absolute top-1/4 left-1/5 w-10 h-10 bg-red-500/10 rounded-full blur-2xl animate-pulse-slow"></div>
+      <div class="absolute bottom-1/3 right-1/4 w-16 h-16 bg-yellow-500/10 rounded-full blur-3xl animate-pulse-slow delay-1000"></div>
+      <div class="absolute top-1/5 right-1/5 w-12 h-12 bg-green-500/10 rounded-full blur-2xl animate-pulse-slow delay-2000"></div>
+    </div>
+
+    <!-- Section Glow -->
+    <div class="section-glow absolute inset-0"></div>
   </div>
 
-  <div class="section-glow absolute inset-0"></div>
-
+  <!-- Content -->
   <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
-    <div class="section-fade-in mb-20">
+    <div class="section-fade-in mb-16">
       <h2 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6 text-white drop-shadow-md">
         Ready to <span class="gradient-text">Secure</span> Your Future?
       </h2>
       <p class="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
         Join hundreds of mission-driven organizations that have secured millions through our system.
       </p>
+    </div>
 
-      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-        <button class="bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-4 rounded-lg shadow-md transition">
-          Calculate Eligibility
-        </button>
-        <button class="bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-lg shadow-md transition">
-          Browse FAQs
-        </button>
+    <!-- Stats -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-10 text-white">
+      <div>
+        <div class="text-4xl font-bold text-blue-400 mb-1">$29.7M+</div>
+        <div class="text-sm text-gray-300">Secured</div>
+      </div>
+      <div>
+        <div class="text-4xl font-bold text-green-400 mb-1">99%</div>
+        <div class="text-sm text-gray-300">Success Rate</div>
+      </div>
+      <div>
+        <div class="text-4xl font-bold text-purple-400 mb-1">500+</div>
+        <div class="text-sm text-gray-300">Organizations</div>
       </div>
     </div>
 
-    <div class="glass-card p-10 sm:p-12 rounded-2xl bg-black/70 backdrop-blur border border-white/10">
-      <div class="grid md:grid-cols-3 gap-8 mb-10">
-        <div>
-          <div class="text-4xl font-bold text-blue-400 mb-2">$29.7M+</div>
-          <div class="text-gray-300">Secured</div>
-        </div>
-        <div>
-          <div class="text-4xl font-bold text-green-400 mb-2">99%</div>
-          <div class="text-gray-300">Success Rate</div>
-        </div>
-        <div>
-          <div class="text-4xl font-bold text-purple-400 mb-2">500+</div>
-          <div class="text-gray-300">Organizations</div>
-        </div>
-      </div>
+    <!-- CTA Button -->
+    <button class="primary-button px-12 py-4 rounded-full font-medium text-lg bg-blue-600 hover:bg-blue-700 text-white transition shadow-lg">
+      <i class="fas fa-rocket mr-2"></i>
+      Start Your Assessment
+    </button>
 
-      <button class="primary-button px-12 py-4 rounded-full font-medium text-lg bg-blue-600 hover:bg-blue-700 text-white transition shadow-lg">
-        <i class="fas fa-rocket mr-2"></i>
-        Start Your Assessment
-      </button>
-
-      <p class="text-gray-400 mt-4 text-sm">
-        <i class="fas fa-shield-check mr-2"></i>
-        Free assessment • No commitment • Swift results
-      </p>
-    </div>
+    <p class="text-gray-400 mt-4 text-sm">
+      <i class="fas fa-shield-check mr-2"></i>
+      Free assessment • No commitment • Swift results
+    </p>
   </div>
 </section>
+
 
 
     <!-- Footer -->
