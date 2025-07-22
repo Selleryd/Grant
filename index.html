@@ -189,19 +189,25 @@
             transform: translateY(0);
         }
         
-       .calculator-option {
+  .calculator-option {
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    background: rgba(255, 255, 255, 0.05); /* Default transparent background */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.05) !important; /* Transparent background */
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
 }
 
 .calculator-option:hover {
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.08); /* Slightly more glow on hover */
+    background: rgba(255, 255, 255, 0.1) !important;
 }
+
+.calculator-option.selected {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(59, 130, 246, 0.5) !important;
+}
+
 
 .calculator-option.selected {
     background: rgba(59, 130, 246, 0.15); /* Blue-tinted highlight */
