@@ -1366,13 +1366,12 @@
 
 
 <!-- FAQ Section -->
-    <!-- Anchor for Nav Link -->
-<div id="faq"></div>
-<section id="faq" class="py-24 bg-black text-white">
+<section id="faq" class="py-24 bg-black text-white relative z-10">
   <div class="max-w-4xl mx-auto px-6">
     <h2 class="text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+
     <div class="space-y-4" id="faq-list">
-      <!-- FAQs inserted by JS -->
+      <!-- FAQs inserted here by JS -->
     </div>
   </div>
 </section>
@@ -1424,50 +1423,62 @@
   const faqList = document.getElementById("faq-list");
   faqList.innerHTML = faqs.map((f, i) => `
     <div class="border border-white/10 rounded-lg overflow-hidden">
-      <button onclick="toggleFAQ(${i})" class="w-full text-left px-5 py-4 flex justify-between items-center bg-white/5 hover:bg-white/10 transition">
+      <button onclick="toggleFAQ(${i})" class="w-full flex justify-between items-center text-left px-5 py-4 bg-white/5 hover:bg-white/10 transition-all">
         <span class="text-lg font-medium">${f.q}</span>
-        <svg id="icon-${i}" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg id="icon-${i}" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path d="M19 9l-7 7-7-7"/>
         </svg>
       </button>
-      <div id="answer-${i}" class="px-5 py-4 hidden text-gray-300 text-sm leading-relaxed">${f.a}</div>
+      <div id="answer-${i}" class="hidden px-5 py-4 text-sm text-gray-300 bg-black/40 leading-relaxed">
+        ${f.a}
+      </div>
     </div>
   `).join('');
 
   function toggleFAQ(index) {
     const answer = document.getElementById(`answer-${index}`);
     const icon = document.getElementById(`icon-${index}`);
-    answer.classList.toggle("hidden");
-    icon.classList.toggle("rotate-180");
+    const isOpen = !answer.classList.contains("hidden");
+
+    // Close all other FAQs
+    document.querySelectorAll('[id^="answer-"]').forEach(el => el.classList.add("hidden"));
+    document.querySelectorAll('[id^="icon-"]').forEach(el => el.classList.remove("rotate-180"));
+
+    if (!isOpen) {
+      answer.classList.remove("hidden");
+      icon.classList.add("rotate-180");
+    }
   }
 </script>
-<section>
+</section>
 
 <!-- CTA Section -->
 <section id="contact" class="py-32 relative overflow-hidden bg-transparent">
   <!-- Radar & Threat Background -->
   <div class="absolute inset-0 z-0">
-    <!-- Radar -->
-    <div class="radar-container absolute w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20">
-      <div class="radar-sweep animate-spin-slow absolute w-full h-full rounded-full border border-blue-500/30"></div>
-      <div class="radar-circle absolute w-full h-full rounded-full border border-blue-500/10"></div>
-      <div class="radar-circle absolute w-3/4 h-3/4 top-1/8 left-1/8 rounded-full border border-blue-500/10"></div>
-      <div class="radar-circle absolute w-1/2 h-1/2 top-1/4 left-1/4 rounded-full border border-blue-500/10"></div>
+    <!-- Complex Radar Animation -->
+    <div class="radar-container absolute w-[900px] h-[900px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-15 pointer-events-none">
+      <div class="absolute w-full h-full border border-blue-500/20 rounded-full animate-pulse-slow"></div>
+      <div class="absolute w-4/5 h-4/5 top-1/10 left-1/10 border border-blue-400/10 rounded-full"></div>
+      <div class="absolute w-3/5 h-3/5 top-1/5 left-1/5 border border-blue-400/10 rounded-full"></div>
+      <div class="absolute w-2/5 h-2/5 top-[30%] left-[30%] border border-blue-400/10 rounded-full"></div>
+      <div class="radar-sweep absolute w-full h-full rounded-full border border-blue-500/30 animate-spin-slow"></div>
     </div>
 
-    <!-- Subtle Threat Blobs -->
-    <div class="absolute w-full h-full">
-      <div class="absolute top-1/4 left-1/5 w-10 h-10 bg-red-500/10 rounded-full blur-2xl animate-pulse-slow"></div>
-      <div class="absolute bottom-1/3 right-1/4 w-16 h-16 bg-yellow-500/10 rounded-full blur-3xl animate-pulse-slow delay-1000"></div>
-      <div class="absolute top-1/5 right-1/5 w-12 h-12 bg-green-500/10 rounded-full blur-2xl animate-pulse-slow delay-2000"></div>
+    <!-- Subtle Animated Threat Blobs -->
+    <div class="absolute w-full h-full z-0 pointer-events-none">
+      <div class="absolute top-1/4 left-1/6 w-12 h-12 bg-red-500/10 rounded-full blur-2xl animate-pulse-slow"></div>
+      <div class="absolute top-1/6 right-1/5 w-16 h-16 bg-yellow-400/10 rounded-full blur-3xl animate-pulse-slow delay-1000"></div>
+      <div class="absolute bottom-1/4 left-1/3 w-14 h-14 bg-green-400/10 rounded-full blur-2xl animate-pulse-slow delay-1500"></div>
     </div>
 
-    <!-- Section Glow -->
-    <div class="section-glow absolute inset-0"></div>
+    <!-- Glow Overlay -->
+    <div class="section-glow absolute inset-0 pointer-events-none"></div>
   </div>
 
-  <!-- Content -->
-  <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+  <!-- Main Content -->
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+    <!-- Heading -->
     <div class="section-fade-in mb-16">
       <h2 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6 text-white drop-shadow-md">
         Ready to <span class="gradient-text">Secure</span> Your Future?
@@ -1494,17 +1505,31 @@
     </div>
 
     <!-- CTA Button -->
-    <button class="primary-button px-12 py-4 rounded-full font-medium text-lg bg-blue-600 hover:bg-blue-700 text-white transition shadow-lg">
-      <i class="fas fa-rocket mr-2"></i>
-      Start Your Assessment
-    </button>
+    <a href="https://gosellery.com" class="inline-block">
+      <button class="primary-button px-12 py-4 rounded-full font-medium text-lg bg-blue-600 hover:bg-blue-700 text-white transition shadow-lg">
+        <i class="fas fa-rocket mr-2"></i>
+        Start Your Assessment
+      </button>
+    </a>
 
+    <!-- Trust Tagline -->
     <p class="text-gray-400 mt-4 text-sm">
       <i class="fas fa-shield-check mr-2"></i>
       Free assessment • No commitment • Swift results
     </p>
+
+    <!-- Alert CTA Box -->
+    <div class="mt-10 max-w-md mx-auto glass-card p-6 bg-white/5 backdrop-blur rounded-xl border border-white/10 shadow-lg">
+      <a href="https://gosellery.com" class="block w-full">
+        <button class="w-full flex items-center justify-center gap-3 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold text-base rounded-lg transition-all duration-300">
+          <i class="fab fa-whatsapp text-xl"></i>
+          Get WhatsApp & Email Alerts
+        </button>
+      </a>
+    </div>
   </div>
 </section>
+
 
 
 
