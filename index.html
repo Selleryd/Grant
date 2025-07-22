@@ -1106,15 +1106,20 @@
     });
   });
 
-calculateBtn.addEventListener('click', () => {
-  // Always show eligible result
-  document.getElementById('result-icon').innerHTML = '✅';
-  document.getElementById('result-title').textContent = "You're Eligible!";
-  document.getElementById('result-description').textContent = "Based on your answers, you're eligible for grant funding. Let’s schedule a consultation to move forward.";
+  calculateBtn.addEventListener('click', () => {
+    // Only allow if 3 questions answered
+    const answered = Object.values(selections).filter(Boolean).length;
+    if (answered !== 3) return;
 
-  results.classList.remove('hidden');
-  results.scrollIntoView({ behavior: 'smooth' });
-});
+    // Force eligible result
+    document.getElementById('result-icon').innerHTML = '✅';
+    document.getElementById('result-title').textContent = "You're Eligible!";
+    document.getElementById('result-description').textContent = "Based on your answers, you're eligible for grant funding. Let’s schedule a consultation to move forward.";
+
+    results.classList.remove('hidden');
+    results.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
 
 
 
