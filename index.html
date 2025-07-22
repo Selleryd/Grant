@@ -1215,7 +1215,81 @@
 </div>
       
 </section>
+<!-- FAQ Section -->
+<section id="faq" class="py-24 bg-black text-white">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+    <div class="space-y-4" id="faq-list">
+      <!-- FAQs inserted by JS -->
+    </div>
+  </div>
+</section>
 
+<script>
+  const faqs = [
+    {
+      q: "What is Fortress Alerts?",
+      a: "Fortress Alerts is a real-time intelligence system that helps nonprofits and community institutions stay informed about local security threats and available grant opportunities."
+    },
+    {
+      q: "How do I sign up for grant alerts?",
+      a: "Click the 'Get Critical Grant Alerts' button above and choose your preferred method — WhatsApp or Email. You’ll instantly be added to our real-time update system."
+    },
+    {
+      q: "Is this service only for NY Tri-State area?",
+      a: "No — while we specialize in NY, NJ, and CT, we are rapidly expanding and cover many national-level grants and alerts as well."
+    },
+    {
+      q: "Do I need to be a nonprofit to receive alerts?",
+      a: "Not necessarily. While many grants are for 501(c)(3) organizations, our alerts also include security updates, AI assessments, and public safety info that apply to all institutions."
+    },
+    {
+      q: "Are the grants competitive?",
+      a: "Yes — but our early alerts give you a head start. Most of our users get notified 3–5 days before official announcements."
+    },
+    {
+      q: "How often are alerts sent?",
+      a: "You’ll receive real-time alerts as soon as critical information becomes available. On average, users receive 2–5 alerts per week."
+    },
+    {
+      q: "Is there a cost for this service?",
+      a: "Basic alerts are free. Advanced AI-powered assessments and grant-writing assistance are available through our partner network."
+    },
+    {
+      q: "Can I unsubscribe anytime?",
+      a: "Yes — you’re in full control. Every WhatsApp and email alert includes a one-click unsubscribe link."
+    },
+    {
+      q: "What makes Fortress different from other grant platforms?",
+      a: "Speed, accuracy, and relevance. We combine human research, AI monitoring, and local intelligence to deliver exactly what you need — before the rest of the internet catches on."
+    },
+    {
+      q: "Who uses this platform?",
+      a: "Synagogues, schools, churches, nonprofits, community centers, and even small municipalities across the U.S."
+    }
+  ];
+
+  const faqList = document.getElementById("faq-list");
+  faqList.innerHTML = faqs.map((f, i) => `
+    <div class="border border-white/10 rounded-lg overflow-hidden">
+      <button onclick="toggleFAQ(${i})" class="w-full text-left px-5 py-4 flex justify-between items-center bg-white/5 hover:bg-white/10 transition">
+        <span class="text-lg font-medium">${f.q}</span>
+        <svg id="icon-${i}" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div id="answer-${i}" class="px-5 py-4 hidden text-gray-300 text-sm leading-relaxed">${f.a}</div>
+    </div>
+  `).join('');
+
+  function toggleFAQ(index) {
+    const answer = document.getElementById(`answer-${index}`);
+    const icon = document.getElementById(`icon-${index}`);
+    answer.classList.toggle("hidden");
+    icon.classList.toggle("rotate-180");
+  }
+</script>
+<section>
 
     <!-- CTA Section -->
     <section id="contact" class="py-32 relative overflow-hidden">
@@ -1778,6 +1852,8 @@
     }
   }
 </style>
+
+    
 
 
 </body>
