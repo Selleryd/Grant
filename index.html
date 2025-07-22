@@ -1749,22 +1749,44 @@
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'962f0a7cf610c488',t:'MTc1MzE0NjQ0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <style>
+  /* Fix background for all calculator options */
   .calculator-option {
     background-color: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(6px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
-  @media (min-width: 768px) {
-    .calculator-option {
-      background-color: transparent !important;
-    }
-  }
-
+  /* Fix result box background */
   #results > div {
     background-color: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(6px) !important;
+    color: #fff !important;
+  }
+
+  @media (max-width: 768px) {
+    .calculator-option,
+    #results > div {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+    }
   }
 </style>
+
+<script>
+  // Optional reinforcement in case JS modifies classes later
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.calculator-option').forEach(el => {
+      el.style.backgroundColor = 'rgba(255,255,255,0.05)';
+      el.style.backdropFilter = 'blur(6px)';
+    });
+
+    const resultsBox = document.querySelector('#results > div');
+    if (resultsBox) {
+      resultsBox.style.backgroundColor = 'rgba(255,255,255,0.05)';
+      resultsBox.style.backdropFilter = 'blur(6px)';
+    }
+  });
+</script>
+
 
 </body>
 </html>
