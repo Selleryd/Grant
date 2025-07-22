@@ -1190,70 +1190,79 @@
       </div>
     </div>
 
- <!-- Threat Dashboard Section -->
-<section class="relative bg-black text-white py-32 overflow-hidden z-0">
-  <!-- Background Effects -->
-  <div class="absolute inset-0 pointer-events-none z-0">
-    <div class="section-glow"></div>
-    <div class="webbing"></div>
-    <div class="floating-particles">
-      <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
-      <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
-      <div class="particle" style="left: 75%; animation-delay: 5s;"></div>
-    </div>
-  </div>
+<!-- Threat Intelligence Section -->
+<section class="py-24 px-6 relative bg-black overflow-hidden">
+  <!-- Background Glow -->
+  <div class="absolute inset-0 bg-gradient-to-br from-[#0f111a] to-[#0a0c13] opacity-90 z-0"></div>
 
-  <!-- Dashboard Container -->
-  <div class="relative z-10 max-w-4xl mx-auto px-6">
-    <div class="glass-card p-8 rounded-2xl backdrop-blur-md border border-white/10">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-semibold flex items-center space-x-2">
-          <i class="fas fa-shield-alt text-blue-400"></i>
-          <span>Threat Dashboard</span>
-        </h2>
-        <div class="flex space-x-3 text-sm">
-          <span class="text-red-500">● High</span>
-          <span class="text-yellow-400">● Medium</span>
-          <span class="text-green-400">● Secure</span>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+        Threat Intelligence
+      </h2>
+      <p class="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
+        Real-time threat monitoring, predictive alerts, and secure notifications.
+      </p>
+    </div>
+
+    <!-- Dashboard Panels -->
+    <div class="grid md:grid-cols-2 gap-10 relative z-10">
+      
+      <!-- Threat Map -->
+      <div class="bg-gradient-to-b from-[#0f1527] to-[#111827] rounded-2xl shadow-xl p-6 relative backdrop-blur-md border border-gray-700">
+        <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <i class="fas fa-globe-americas text-blue-400"></i> Threat Signal Map
+        </h3>
+        <div id="threat-map" class="h-64 bg-[#1a2138] rounded-xl flex items-center justify-center text-gray-400 text-sm">
+          Loading Threat Zones...
+        </div>
+        <div class="flex justify-end gap-6 mt-4 text-sm">
+          <div class="text-red-500">● High</div>
+          <div class="text-yellow-400">● Medium</div>
+          <div class="text-green-400">● Secure</div>
         </div>
       </div>
 
-      <!-- Map Placeholder -->
-      <div class="relative bg-blue-950/50 border border-white/10 backdrop-blur-md rounded-lg h-48 overflow-hidden grid place-items-center mb-8">
-        <canvas id="threatMapCanvas" class="w-full h-full absolute inset-0 z-0"></canvas>
-        <span class="z-10 text-gray-400 text-sm">Threat Signal Tracking...</span>
-      </div>
-
       <!-- Activity Feed -->
-      <ul id="activityFeed" class="space-y-4 text-sm font-medium">
-        <!-- JS will rotate these -->
-        <li class="flex justify-between">
-          <span><span class="text-green-400">✔</span> Brooklyn Shul - $125K Grant Approved</span>
-          <span class="text-green-500">APPROVED</span>
-        </li>
-        <li class="flex justify-between">
-          <span><span class="text-red-500">⚠</span> NYC Council - New $10M Grant Released</span>
-          <span class="text-red-400">ALERT</span>
-        </li>
-        <li class="flex justify-between">
-          <span><span class="text-blue-400">🧠</span> Flatbush Synagogue - AI Assessment Complete</span>
-          <span class="text-blue-400">COMPLETE</span>
-        </li>
-        <li class="flex justify-between">
-          <span><span class="text-purple-400">📡</span> Bronx Center - Federal Program Available</span>
-          <span class="text-purple-400">NEW</span>
-        </li>
-      </ul>
-
-      <!-- CTA Button -->
-      <div class="text-center mt-10">
-        <a href="#alerts" class="bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-full text-lg shadow-md transition-all">
-          <i class="fas fa-bell mr-2"></i> Get Critical Grant Alerts
-        </a>
+      <div class="bg-gradient-to-b from-[#0f1527] to-[#111827] rounded-2xl shadow-xl p-6 relative backdrop-blur-md border border-gray-700">
+        <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <i class="fas fa-bolt text-yellow-300"></i> Activity Feed
+        </h3>
+        <div id="activity-feed" class="space-y-3 text-sm text-gray-200 max-h-64 overflow-y-auto pr-2">
+          <!-- JavaScript will inject live items here -->
+        </div>
       </div>
+
     </div>
   </div>
+
+  <!-- Particles Background -->
+  <canvas id="particles-js" class="absolute inset-0 z-0 opacity-20 pointer-events-none"></canvas>
 </section>
+
+<!-- JavaScript for Live Feed and Fake Threat Data -->
+<script>
+  const feed = document.getElementById("activity-feed");
+  const events = [
+    { text: "Brooklyn Shul – $125K Grant Approved", status: "APPROVED", color: "text-green-400" },
+    { text: "NYC Community – New 2024 Grant Released", status: "ALERT", color: "text-red-400" },
+    { text: "Queens School – Awaiting Final Submission", status: "PENDING", color: "text-yellow-400" },
+    { text: "Lakewood Center – Site Visit Scheduled", status: "SCHEDULED", color: "text-blue-400" },
+  ];
+
+  function loadFeed() {
+    const e = events[Math.floor(Math.random() * events.length)];
+    const item = document.createElement("div");
+    item.className = "flex justify-between items-center border-b border-gray-600 pb-2";
+    item.innerHTML = `<span>${e.text}</span><span class="font-bold ${e.color}">${e.status}</span>`;
+    feed.prepend(item);
+    if (feed.childNodes.length > 10) feed.removeChild(feed.lastChild);
+  }
+
+  setInterval(loadFeed, 3000); // Add new item every 3 seconds
+  loadFeed(); // Initial item
+</script>
+
 
 <!-- FAQ Section -->
 <section id="faq" class="py-24 bg-black text-white">
