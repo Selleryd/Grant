@@ -1453,85 +1453,80 @@
 </section>
 
 <!-- CTA Section -->
-<section id="contact" class="py-32 relative overflow-hidden bg-transparent">
-  <!-- Radar & Threat Background -->
-  <div class="absolute inset-0 z-0">
-    <!-- Complex Radar Animation -->
-    <div class="radar-container absolute w-[900px] h-[900px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-15 pointer-events-none">
-      <div class="absolute w-full h-full border border-blue-500/20 rounded-full animate-pulse-slow"></div>
-      <div class="absolute w-4/5 h-4/5 top-1/10 left-1/10 border border-blue-400/10 rounded-full"></div>
-      <div class="absolute w-3/5 h-3/5 top-1/5 left-1/5 border border-blue-400/10 rounded-full"></div>
-      <div class="absolute w-2/5 h-2/5 top-[30%] left-[30%] border border-blue-400/10 rounded-full"></div>
-      <div class="radar-sweep absolute w-full h-full rounded-full border border-blue-500/30 animate-spin-slow"></div>
+<section id="contact" class="py-40 relative overflow-hidden bg-black text-white">
+  <!-- Radar and Threat Layers -->
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <!-- Layered Radar System -->
+    <div class="absolute w-[1000px] h-[1000px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-15 pointer-events-none">
+      <!-- Base Rings -->
+      <div class="absolute w-full h-full rounded-full border border-blue-400/10"></div>
+      <div class="absolute w-4/5 h-4/5 top-1/10 left-1/10 rounded-full border border-blue-400/10"></div>
+      <div class="absolute w-3/5 h-3/5 top-[20%] left-[20%] rounded-full border border-blue-400/10"></div>
+      <div class="absolute w-2/5 h-2/5 top-[30%] left-[30%] rounded-full border border-blue-400/10"></div>
+      <!-- Sweep -->
+      <div class="radar-sweep absolute w-full h-full rounded-full border border-blue-500/30 animate-spin-slow blur-[2px]"></div>
     </div>
 
-    <!-- Subtle Animated Threat Blobs -->
+    <!-- Animated Threat Signals -->
     <div class="absolute w-full h-full z-0 pointer-events-none">
-      <div class="absolute top-1/4 left-1/6 w-12 h-12 bg-red-500/10 rounded-full blur-2xl animate-pulse-slow"></div>
-      <div class="absolute top-1/6 right-1/5 w-16 h-16 bg-yellow-400/10 rounded-full blur-3xl animate-pulse-slow delay-1000"></div>
-      <div class="absolute bottom-1/4 left-1/3 w-14 h-14 bg-green-400/10 rounded-full blur-2xl animate-pulse-slow delay-1500"></div>
+      <!-- Red ping -->
+      <div class="absolute top-[22%] left-[18%] w-12 h-12 bg-red-500/10 rounded-full blur-2xl animate-ping-slow shadow-red-500/30 shadow-lg"></div>
+      <!-- Yellow ping -->
+      <div class="absolute top-[30%] right-[22%] w-14 h-14 bg-yellow-400/10 rounded-full blur-2xl animate-ping-slow delay-1000 shadow-yellow-400/20 shadow-md"></div>
+      <!-- Green ping -->
+      <div class="absolute bottom-[20%] left-[25%] w-10 h-10 bg-green-400/10 rounded-full blur-2xl animate-ping-slow delay-1500"></div>
+      <!-- Orange flicker -->
+      <div class="absolute bottom-[15%] right-[18%] w-16 h-16 bg-orange-500/10 rounded-full blur-3xl animate-pulse-slow delay-2000"></div>
+      <!-- Blue flicker -->
+      <div class="absolute top-[12%] right-[12%] w-10 h-10 bg-cyan-400/10 rounded-full blur-2xl animate-pulse-slow delay-[2.5s]"></div>
     </div>
 
     <!-- Glow Overlay -->
-    <div class="section-glow absolute inset-0 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-radial from-blue-500/5 to-transparent"></div>
   </div>
 
-  <!-- Main Content -->
+  <!-- CTA Content -->
   <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-    <!-- Heading -->
-    <div class="section-fade-in mb-16">
-      <h2 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6 text-white drop-shadow-md">
+    <!-- Headline -->
+    <div class="mb-16 section-fade-in">
+      <h2 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-6 text-white drop-shadow-md">
         Ready to <span class="gradient-text">Secure</span> Your Future?
       </h2>
-      <p class="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-        Join hundreds of mission-driven organizations that have secured millions through our system.
+      <p class="text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+        Join hundreds of mission-driven organizations receiving early alerts, AI insights, and exclusive access to millions in funding.
       </p>
     </div>
 
     <!-- Stats -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-10 text-white">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-12 text-white">
       <div>
-        <div class="text-4xl font-bold text-blue-400 mb-1">$29.7M+</div>
-        <div class="text-sm text-gray-300">Secured</div>
+        <div class="text-5xl font-bold text-blue-400 mb-1">$29.7M+</div>
+        <div class="text-sm text-gray-400 uppercase tracking-wider">Secured</div>
       </div>
       <div>
-        <div class="text-4xl font-bold text-green-400 mb-1">99%</div>
-        <div class="text-sm text-gray-300">Success Rate</div>
+        <div class="text-5xl font-bold text-green-400 mb-1">99%</div>
+        <div class="text-sm text-gray-400 uppercase tracking-wider">Success Rate</div>
       </div>
       <div>
-        <div class="text-4xl font-bold text-purple-400 mb-1">500+</div>
-        <div class="text-sm text-gray-300">Organizations</div>
+        <div class="text-5xl font-bold text-purple-400 mb-1">500+</div>
+        <div class="text-sm text-gray-400 uppercase tracking-wider">Organizations</div>
       </div>
     </div>
 
-    <!-- CTA Button -->
+    <!-- Primary CTA Button -->
     <a href="https://gosellery.com" class="inline-block">
-      <button class="primary-button px-12 py-4 rounded-full font-medium text-lg bg-blue-600 hover:bg-blue-700 text-white transition shadow-lg">
-        <i class="fas fa-rocket mr-2"></i>
-        Start Your Assessment
+      <button class="primary-button px-14 py-5 rounded-full font-semibold text-xl bg-blue-600 hover:bg-blue-700 text-white transition shadow-lg glow-button tracking-wide">
+        <i class="fas fa-rocket mr-3"></i>Start Your Assessment
       </button>
     </a>
 
-    <!-- Trust Tagline -->
+    <!-- Subtext -->
     <p class="text-gray-400 mt-4 text-sm">
       <i class="fas fa-shield-check mr-2"></i>
-      Free assessment • No commitment • Swift results
+      No commitment • Instant access • Full coverage
     </p>
-
-    <!-- Alert CTA Box -->
-    <div class="mt-10 max-w-md mx-auto glass-card p-6 bg-white/5 backdrop-blur rounded-xl border border-white/10 shadow-lg">
-      <a href="https://gosellery.com" class="block w-full">
-        <button class="w-full flex items-center justify-center gap-3 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold text-base rounded-lg transition-all duration-300">
-          <i class="fab fa-whatsapp text-xl"></i>
-          Get WhatsApp & Email Alerts
-        </button>
-      </a>
-    </div>
   </div>
 </section>
-
-
-
 
     <!-- Footer -->
     <footer class="py-16 border-t border-white/10 relative">
