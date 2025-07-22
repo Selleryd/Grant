@@ -907,7 +907,358 @@
             </div>
         </div>
     </section>
+  <!-- Calculator Section -->
+<section id="calculator" class="py-20 relative">
+  <div class="section-glow absolute inset-0"></div>
+  <div class="max-w-4xl mx-auto px-6 relative z-10">
+    <div class="text-center mb-16 section-fade-in">
+      <h2 class="text-4xl lg:text-6xl font-bold mb-6">
+        <span class="gradient-text">Eligibility</span> Calculator
+      </h2>
+      <p class="text-xl text-gray-300">
+        Quick AI assessment to determine your grant eligibility and potential funding
+      </p>
+    </div>
 
+    <div class="glass-card p-8 lg:p-12">
+      <div class="space-y-12" id="calculator-form">
+
+        <!-- Question 1 -->
+        <div class="section-fade-in">
+          <h3 class="text-2xl font-bold mb-6 flex items-center">
+            <span class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold mr-4">1</span>
+            Organization Type
+          </h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="calculator-option p-6 rounded-xl border border-white/10 backdrop-blur-sm"
+     style="background-color: rgba(255, 255, 255, 0.05);"
+     data-question="type" data-value="nonprofit">
+              <div class="flex items-center space-x-4">
+                <i class="fas fa-heart text-2xl text-red-400"></i>
+                <div>
+                  <div class="font-semibold">Nonprofit</div>
+                  <div class="text-sm text-gray-400">501(c)(3) Organizations</div>
+                </div>
+              </div>
+            </div>
+            <div class="calculator-option p-6 rounded-xl border border-white/10 bg-white/5 sm:bg-white/5 md:bg-white/5 lg:bg-transparent backdrop-blur-sm" data-question="type" data-value="religious">
+              <div class="flex items-center space-x-4">
+                <i class="fas fa-church text-2xl text-blue-400"></i>
+                <div>
+                  <div class="font-semibold">Religious</div>
+                  <div class="text-sm text-gray-400">Houses of Worship</div>
+                </div>
+              </div>
+            </div>
+            <div class="calculator-option p-6 rounded-xl border border-white/10 bg-white/5 sm:bg-white/5 md:bg-white/5 lg:bg-transparent backdrop-blur-sm" data-question="type" data-value="educational">
+              <div class="flex items-center space-x-4">
+                <i class="fas fa-graduation-cap text-2xl text-purple-400"></i>
+                <div>
+                  <div class="font-semibold">Educational</div>
+                  <div class="text-sm text-gray-400">Schools & Universities</div>
+                </div>
+              </div>
+            </div>
+            <div class="calculator-option p-6 rounded-xl border border-white/10 bg-white/5 sm:bg-white/5 md:bg-white/5 lg:bg-transparent backdrop-blur-sm" data-question="type" data-value="community">
+              <div class="flex items-center space-x-4">
+                <i class="fas fa-users text-2xl text-green-400"></i>
+                <div>
+                  <div class="font-semibold">Community</div>
+                  <div class="text-sm text-gray-400">Centers & Groups</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section-fade-in">
+          <h3 class="text-2xl font-bold mb-6 flex items-center">
+            <span class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold mr-4">2</span>
+            Location
+          </h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="calculator-option p-6 rounded-xl border border-white/10 bg-white/5 sm:bg-white/5 md:bg-white/5 lg:bg-transparent backdrop-blur-sm" data-question="location" data-value="eligible">
+              <div class="flex items-center space-x-4">
+                <i class="fas fa-map-marker-alt text-2xl text-green-400"></i>
+                <div>
+                  <div class="font-semibold">NY Tri-State Area</div>
+                  <div class="text-sm text-gray-400">NY, NJ, CT - Eligible</div>
+                </div>
+              </div>
+            </div>
+            <div class="calculator-option p-6 rounded-xl border border-white/10 bg-white/5 sm:bg-white/5 md:bg-white/5 lg:bg-transparent backdrop-blur-sm" data-question="location" data-value="other">
+              <div class="flex items-center space-x-4">
+                <i class="fas fa-globe text-2xl text-gray-400"></i>
+                <div>
+                  <div class="font-semibold">Other Location</div>
+                  <div class="text-sm text-gray-400">Outside current area</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section-fade-in">
+          <h3 class="text-2xl font-bold mb-6 flex items-center">
+            <span class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold mr-4">3</span>
+            Facility Size
+          </h3>
+          <div class="grid md:grid-cols-4 gap-4">
+            <div class="calculator-option p-6 rounded-xl border border-white/10 bg-white/5 sm:bg-white/5 md:bg-white/5 lg:bg-transparent backdrop-blur-sm" data-question="size" data-value="small">
+              <div class="text-2xl font-bold text-blue-400 mb-2">&lt; 50</div>
+              <div class="font-semibold">Small</div>
+            </div>
+            <div class="calculator-option p-6 rounded-xl border border-white/10 bg-white/5 sm:bg-white/5 md:bg-white/5 lg:bg-transparent backdrop-blur-sm" data-question="size" data-value="medium">
+              <div class="text-2xl font-bold text-green-400 mb-2">50-200</div>
+              <div class="font-semibold">Medium</div>
+            </div>
+            <div class="calculator-option p-6 rounded-xl border border-white/10 bg-white/5 sm:bg-white/5 md:bg-white/5 lg:bg-transparent backdrop-blur-sm" data-question="size" data-value="large">
+              <div class="text-2xl font-bold text-yellow-400 mb-2">200-500</div>
+              <div class="font-semibold">Large</div>
+            </div>
+            <div class="calculator-option p-6 rounded-xl border border-white/10 bg-white/5 sm:bg-white/5 md:bg-white/5 lg:bg-transparent backdrop-blur-sm" data-question="size" data-value="enterprise">
+              <div class="text-2xl font-bold text-red-400 mb-2">500+</div>
+              <div class="font-semibold">Enterprise</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="mt-12 mb-8">
+        <div class="flex justify-between text-sm text-gray-400 mb-2">
+          <span>Progress</span>
+          <span id="progress-text">0/3 Complete</span>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-1">
+          <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Calculate Button -->
+      <div class="text-center">
+        <button id="calculate-btn" class="primary-button px-12 py-4 rounded-full font-medium opacity-50 cursor-not-allowed" disabled>
+          <i class="fas fa-calculator mr-2"></i>
+          Calculate Eligibility
+        </button>
+      </div>
+
+      <!-- Results -->
+      <div id="results" class="mt-12 hidden">
+        <div class="glass-card p-8 rounded-2xl bg-white/5 sm:bg-white/5 md:bg-white/5 lg:bg-transparent backdrop-blur-sm border border-white/10 text-white">
+          <div class="text-center mb-8">
+            <div id="result-icon" class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center"></div>
+            <h3 id="result-title" class="text-3xl font-bold mb-4"></h3>
+            <p id="result-description" class="text-gray-300"></p>
+          </div>
+          <div id="result-details" class="grid md:grid-cols-2 gap-8"></div>
+          <div class="text-center mt-8">
+            <a href="https://google.com" class="primary-button px-8 py-3 rounded-full font-medium inline-block">
+              <i class="fas fa-calendar mr-2"></i>
+              Schedule Consultation
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Intelligence Section -->
+    <section id="intelligence" class="py-32 relative">
+        <div class="section-glow-intense absolute inset-0"></div>
+        <div class="floating-particles">
+            <div class="particle" style="left: 5%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 25%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 45%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 65%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 85%; animation-delay: 8s;"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-20 section-fade-in">
+                <h2 class="text-4xl lg:text-6xl font-bold mb-6">
+                    <span class="gradient-text">Live</span> Intelligence
+                </h2>
+                <p class="text-xl text-gray-300">
+                    Real-time monitoring of threats, opportunities, and security landscape
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-4 gap-8 mb-12">
+                <!-- Live Stats -->
+                <div class="glass-card p-8 text-center relative overflow-hidden">
+                    <div class="w-4 h-4 bg-red-400 rounded-full mx-auto mb-4 pulse-dot"></div>
+                    <div class="text-3xl font-bold text-red-400 mb-2" id="threat-counter">1,247</div>
+                    <div class="text-gray-300">Active Threats</div>
+                    <div class="text-sm text-gray-400 mt-2" id="threat-update">Last updated: <span id="threat-time">2 min ago</span></div>
+                    <div class="absolute top-0 left-0 w-full h-1 bg-red-400/20">
+                        <div class="h-full bg-red-400 animate-pulse" style="width: 75%;"></div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 text-center relative overflow-hidden">
+                    <div class="w-4 h-4 bg-green-400 rounded-full mx-auto mb-4 pulse-dot"></div>
+                    <div class="text-3xl font-bold text-green-400 mb-2" id="grant-counter">$2.8M</div>
+                    <div class="text-gray-300">Available Grants</div>
+                    <div class="text-sm text-gray-400 mt-2">Updated daily</div>
+                    <div class="absolute top-0 left-0 w-full h-1 bg-green-400/20">
+                        <div class="h-full bg-green-400 animate-pulse" style="width: 90%;"></div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 text-center relative overflow-hidden">
+                    <div class="w-4 h-4 bg-blue-400 rounded-full mx-auto mb-4 pulse-dot"></div>
+                    <div class="text-3xl font-bold text-blue-400 mb-2" id="assessment-counter">47</div>
+                    <div class="text-gray-300">Active Assessments</div>
+                    <div class="text-sm text-gray-400 mt-2">Processing now</div>
+                    <div class="absolute top-0 left-0 w-full h-1 bg-blue-400/20">
+                        <div class="h-full bg-blue-400 animate-pulse" style="width: 60%;"></div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 text-center relative overflow-hidden">
+                    <div class="w-4 h-4 bg-purple-400 rounded-full mx-auto mb-4 pulse-dot"></div>
+                    <div class="text-3xl font-bold text-purple-400 mb-2" id="success-counter">99.2%</div>
+                    <div class="text-gray-300">Success Rate</div>
+                    <div class="text-sm text-gray-400 mt-2">All time</div>
+                    <div class="absolute top-0 left-0 w-full h-1 bg-purple-400/20">
+                        <div class="h-full bg-purple-400 animate-pulse" style="width: 99%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Threat Map Visualization -->
+            <div class="glass-card p-8 mb-12">
+                <h3 class="text-2xl font-bold mb-8 flex items-center">
+                    <i class="fas fa-globe-americas text-blue-400 mr-3"></i>
+                    Threat Intelligence Map
+                    <div class="ml-auto flex items-center space-x-4 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-red-500 rounded-full pulse-dot"></div>
+                            <span class="text-gray-400">High Risk</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full pulse-dot"></div>
+                            <span class="text-gray-400">Medium</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-green-500 rounded-full pulse-dot"></div>
+                            <span class="text-gray-400">Secure</span>
+                        </div>
+                    </div>
+                </h3>
+                <div class="relative h-80 bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl overflow-hidden border border-blue-500/20">
+                    <!-- Map Grid -->
+                    <div class="absolute inset-0 opacity-40">
+                        <svg viewBox="0 0 400 300" class="w-full h-full">
+                            <defs>
+                                <pattern id="map-grid" width="15" height="15" patternUnits="userSpaceOnUse">
+                                    <path d="M 15 0 L 0 0 0 15" fill="none" stroke="rgba(59,130,246,0.4)" stroke-width="0.5"/>
+                                </pattern>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                    <feMerge> 
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#map-grid)"/>
+                            <!-- Continent outlines -->
+                            <path d="M50,80 Q80,70 120,85 Q150,90 180,75 Q200,80 220,90 L220,120 Q200,130 180,125 Q150,130 120,125 Q80,120 50,110 Z" fill="none" stroke="rgba(59,130,246,0.3)" stroke-width="1"/>
+                            <path d="M280,100 Q320,95 350,110 Q370,120 380,140 L380,160 Q370,170 350,165 Q320,170 280,160 Z" fill="none" stroke="rgba(59,130,246,0.3)" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    
+                    <!-- Interactive Threat Indicators -->
+                    <div class="threat-indicator absolute cursor-pointer" style="top: 25%; left: 20%;" data-threat="NYC Synagogue - Elevated Risk" data-level="high">
+                        <div class="w-4 h-4 bg-red-500 rounded-full animate-pulse relative">
+                            <div class="absolute inset-0 bg-red-500 rounded-full animate-ping"></div>
+                        </div>
+                    </div>
+                    <div class="threat-indicator absolute cursor-pointer" style="top: 45%; left: 35%;" data-threat="Brooklyn Center - Medium Alert" data-level="medium">
+                        <div class="w-4 h-4 bg-yellow-500 rounded-full animate-pulse relative">
+                            <div class="absolute inset-0 bg-yellow-500 rounded-full animate-ping" style="animation-delay: 0.5s;"></div>
+                        </div>
+                    </div>
+                    <div class="threat-indicator absolute cursor-pointer" style="top: 35%; right: 25%;" data-threat="Manhattan School - Critical" data-level="high">
+                        <div class="w-4 h-4 bg-red-500 rounded-full animate-pulse relative">
+                            <div class="absolute inset-0 bg-red-500 rounded-full animate-ping" style="animation-delay: 1s;"></div>
+                        </div>
+                    </div>
+                    <div class="threat-indicator absolute cursor-pointer" style="bottom: 30%; left: 40%;" data-threat="Queens Facility - Secured" data-level="secure">
+                        <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse relative">
+                            <div class="absolute inset-0 bg-green-500 rounded-full animate-ping" style="animation-delay: 1.5s;"></div>
+                        </div>
+                    </div>
+                    <div class="threat-indicator absolute cursor-pointer" style="top: 55%; left: 60%;" data-threat="Bronx Community - Monitoring" data-level="medium">
+                        <div class="w-4 h-4 bg-yellow-500 rounded-full animate-pulse relative">
+                            <div class="absolute inset-0 bg-yellow-500 rounded-full animate-ping" style="animation-delay: 2s;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Scanning Line -->
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-80" style="animation: scan 6s linear infinite;"></div>
+                    
+                    <!-- Tooltip -->
+                    <div id="threat-tooltip" class="absolute bg-black/90 text-white px-3 py-2 rounded-lg text-sm pointer-events-none opacity-0 transition-opacity z-10">
+                        <div id="tooltip-content"></div>
+                    </div>
+                    
+                    <!-- Real-time data overlay -->
+                    <div class="absolute top-4 right-4 glass-card p-3 text-xs">
+                        <div class="text-blue-400 font-medium mb-1">Live Data</div>
+                        <div class="text-gray-300">Last scan: <span id="scan-time">2s ago</span></div>
+                        <div class="text-gray-300">Active threats: <span id="active-threats" class="text-red-400">7</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="glass-card p-8">
+                <h3 class="text-2xl font-bold mb-8 flex items-center">
+                    <i class="fas fa-activity text-blue-400 mr-3"></i>
+                    Live Activity Feed
+                </h3>
+                <div class="space-y-4" id="activity-feed">
+                    <div class="flex items-center space-x-4 p-4 rounded-xl bg-white/5 activity-item">
+                        <div class="w-3 h-3 bg-green-400 rounded-full pulse-dot"></div>
+                        <div class="flex-1">
+                            <div class="font-medium"><span class="blur-sm">Brooklyn Community</span> Center - $320K Grant Approved</div>
+                            <div class="text-sm text-gray-400">2 minutes ago</div>
+                        </div>
+                        <div class="text-green-400 text-sm font-medium">APPROVED</div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 rounded-xl bg-white/5 activity-item">
+                        <div class="w-3 h-3 bg-blue-400 rounded-full pulse-dot"></div>
+                        <div class="flex-1">
+                            <div class="font-medium"><span class="blur-sm">Manhattan</span> Synagogue - AI Assessment Complete</div>
+                            <div class="text-sm text-gray-400">15 minutes ago</div>
+                        </div>
+                        <div class="text-blue-400 text-sm font-medium">COMPLETE</div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 rounded-xl bg-white/5 activity-item">
+                        <div class="w-3 h-3 bg-yellow-400 rounded-full pulse-dot"></div>
+                        <div class="flex-1">
+                            <div class="font-medium">New Federal Grant Program Available - $5M Pool</div>
+                            <div class="text-sm text-gray-400">1 hour ago</div>
+                        </div>
+                        <div class="text-yellow-400 text-sm font-medium">NEW</div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 rounded-xl bg-white/5 activity-item">
+                        <div class="w-3 h-3 bg-purple-400 rounded-full pulse-dot"></div>
+                        <div class="flex-1">
+                            <div class="font-medium"><span class="blur-sm">Queens Educational</span> Institute - Security Upgrade Complete</div>
+                            <div class="text-sm text-gray-400">3 hours ago</div>
+                        </div>
+                        <div class="text-purple-400 text-sm font-medium">DEPLOYED</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <!-- CTA Section -->
