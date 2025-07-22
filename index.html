@@ -1169,33 +1169,16 @@
 </script>
 
 
-   <section id="intelligence" class="relative bg-black text-white py-32 overflow-hidden">
+  <section id="intelligence" class="relative bg-black text-white py-32 overflow-hidden">
   <!-- Background FX -->
   <div class="floating-particles pointer-events-none absolute inset-0 z-0">
     <div class="particle" style="left: 15%; animation-delay: 1s;"></div>
     <div class="particle" style="left: 45%; animation-delay: 3s;"></div>
     <div class="particle" style="left: 75%; animation-delay: 5s;"></div>
   </div>
-  <div class="webbing pointer-events-none absolute inset-0 z-0 opacity-20"></div>
+  <div class="webbing pointer-events-none absolute inset-0 z-0 opacity-10"></div>
 
-  <!-- Foreground Content -->
-  <div class="relative z-10 max-w-6xl mx-auto px-6">
-    <!-- Threat Map -->
-    <div class="mb-20">
-      <canvas id="threatMap" class="w-full h-64 rounded-xl bg-gradient-to-br from-[#0f172a] to-[#1e293b] shadow-lg border border-white/10"></canvas>
-      <div class="flex justify-end text-xs text-gray-400 mt-2 space-x-4">
-        <div class="flex items-center"><span class="w-2 h-2 rounded-full bg-red-500 mr-1"></span>High</div>
-        <div class="flex items-center"><span class="w-2 h-2 rounded-full bg-yellow-400 mr-1"></span>Medium</div>
-        <div class="flex items-center"><span class="w-2 h-2 rounded-full bg-green-400 mr-1"></span>Secure</div>
-      </div>
-    </div>
-
-<!-- Threat Intelligence Section -->
-<section class="py-24 px-6 relative bg-black overflow-hidden">
-  <!-- Background Glow -->
-  <div class="absolute inset-0 bg-gradient-to-br from-[#0f111a] to-[#0a0c13] opacity-90 z-0"></div>
-
-  <div class="max-w-7xl mx-auto relative z-10">
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
     <div class="text-center mb-16">
       <h2 class="text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
         Threat Intelligence
@@ -1205,16 +1188,14 @@
       </p>
     </div>
 
-    <!-- Dashboard Panels -->
-    <div class="grid md:grid-cols-2 gap-10 relative z-10">
-      
-      <!-- Threat Map -->
-      <div class="bg-gradient-to-b from-[#0f1527] to-[#111827] rounded-2xl shadow-xl p-6 relative backdrop-blur-md border border-gray-700">
+    <div class="grid md:grid-cols-2 gap-10">
+      <!-- Threat Map with Pulsing Blobs -->
+      <div class="relative bg-gradient-to-b from-[#0f1527] to-[#111827] rounded-2xl shadow-xl p-6 border border-gray-700 overflow-hidden">
         <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
           <i class="fas fa-globe-americas text-blue-400"></i> Threat Signal Map
         </h3>
-        <div id="threat-map" class="h-64 bg-[#1a2138] rounded-xl flex items-center justify-center text-gray-400 text-sm">
-          Loading Threat Zones...
+        <div id="threat-map" class="relative h-64 bg-[#1a2138] rounded-xl overflow-hidden">
+          <!-- Pulsing blobs will be injected here -->
         </div>
         <div class="flex justify-end gap-6 mt-4 text-sm">
           <div class="text-red-500">● High</div>
@@ -1224,44 +1205,113 @@
       </div>
 
       <!-- Activity Feed -->
-      <div class="bg-gradient-to-b from-[#0f1527] to-[#111827] rounded-2xl shadow-xl p-6 relative backdrop-blur-md border border-gray-700">
+      <div class="bg-gradient-to-b from-[#0f1527] to-[#111827] rounded-2xl shadow-xl p-6 border border-gray-700 backdrop-blur-md">
         <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
           <i class="fas fa-bolt text-yellow-300"></i> Activity Feed
         </h3>
         <div id="activity-feed" class="space-y-3 text-sm text-gray-200 max-h-64 overflow-y-auto pr-2">
-          <!-- JavaScript will inject live items here -->
+          <!-- JavaScript will inject live items -->
         </div>
       </div>
-
     </div>
   </div>
-
-  <!-- Particles Background -->
-  <canvas id="particles-js" class="absolute inset-0 z-0 opacity-20 pointer-events-none"></canvas>
 </section>
 
-<!-- JavaScript for Live Feed and Fake Threat Data -->
-<script>
-  const feed = document.getElementById("activity-feed");
-  const events = [
-    { text: "Brooklyn Shul – $125K Grant Approved", status: "APPROVED", color: "text-green-400" },
-    { text: "NYC Community – New 2024 Grant Released", status: "ALERT", color: "text-red-400" },
-    { text: "Queens School – Awaiting Final Submission", status: "PENDING", color: "text-yellow-400" },
-    { text: "Lakewood Center – Site Visit Scheduled", status: "SCHEDULED", color: "text-blue-400" },
-  ];
-
-  function loadFeed() {
-    const e = events[Math.floor(Math.random() * events.length)];
-    const item = document.createElement("div");
-    item.className = "flex justify-between items-center border-b border-gray-600 pb-2";
-    item.innerHTML = `<span>${e.text}</span><span class="font-bold ${e.color}">${e.status}</span>`;
-    feed.prepend(item);
-    if (feed.childNodes.length > 10) feed.removeChild(feed.lastChild);
+<style>
+  .particle {
+    position: absolute;
+    top: 0;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 9999px;
+    opacity: 0.05;
+    animation: float 8s infinite linear;
   }
 
-  setInterval(loadFeed, 3000); // Add new item every 3 seconds
-  loadFeed(); // Initial item
+  @keyframes float {
+    0% { transform: translateY(0); opacity: 0.1; }
+    50% { opacity: 0.3; }
+    100% { transform: translateY(100vh); opacity: 0.1; }
+  }
+
+  .blob {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: ping 2s infinite;
+  }
+
+  .blurred-name {
+    filter: blur(3px);
+    transition: filter 0.3s;
+  }
+
+  .blurred-name:hover {
+    filter: blur(0);
+  }
+
+  @keyframes ping {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  const mapContainer = document.getElementById('threat-map');
+  const feed = document.getElementById("activity-feed");
+
+  const threatLevels = ['bg-red-500', 'bg-yellow-400', 'bg-green-400'];
+
+  function spawnBlob() {
+    const blob = document.createElement("div");
+    const size = 14 + Math.random() * 6;
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const level = threatLevels[Math.floor(Math.random() * threatLevels.length)];
+
+    blob.className = `blob ${level}`;
+    blob.style.left = `${x}%`;
+    blob.style.top = `${y}%`;
+    blob.style.width = `${size}px`;
+    blob.style.height = `${size}px`;
+
+    mapContainer.appendChild(blob);
+    setTimeout(() => mapContainer.removeChild(blob), 2000);
+  }
+
+  setInterval(spawnBlob, 800);
+
+  const activityEvents = [
+    { text: "Brooklyn Shul – $125K Grant Approved", status: "APPROVED", color: "text-green-400" },
+    { text: "Lakewood Center – Site Visit Scheduled", status: "SCHEDULED", color: "text-blue-400" },
+    { text: "Queens School – Awaiting Final Submission", status: "PENDING", color: "text-yellow-400" },
+    { text: "NYC Community – Security Alert", status: "ALERT", color: "text-red-400" }
+  ];
+
+  function loadActivity() {
+    const e = activityEvents[Math.floor(Math.random() * activityEvents.length)];
+    const name = `<span class="blurred-name">${e.text.split('–')[0]}</span>`;
+    const action = e.text.split('–')[1];
+    const item = document.createElement("div");
+    item.className = "flex justify-between items-center border-b border-gray-600 pb-2";
+    item.innerHTML = `<span>${name} – ${action}</span><span class="font-bold ${e.color}">${e.status}</span>`;
+    feed.prepend(item);
+    if (feed.childNodes.length > 8) feed.removeChild(feed.lastChild);
+  }
+
+  setInterval(loadActivity, 3000);
+  loadActivity();
 </script>
+
 
 
 <!-- FAQ Section -->
