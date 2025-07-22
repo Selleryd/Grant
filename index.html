@@ -1190,104 +1190,71 @@
       </div>
     </div>
 
-    <!-- Threat Dashboard -->
-    <div class="glass-card p-6 rounded-2xl bg-black border border-white/10 space-y-6 text-white font-sans">
-      <div class="flex justify-between items-center">
-        <h3 class="text-xl font-bold flex items-center">
-          <i class="fas fa-shield-alt text-blue-400 mr-2"></i> Threat Dashboard
-        </h3>
-        <div class="flex items-center gap-3 text-xs text-gray-400">
-          <div class="flex items-center"><span class="w-2 h-2 bg-red-500 rounded-full mr-1"></span>High</div>
-          <div class="flex items-center"><span class="w-2 h-2 bg-yellow-400 rounded-full mr-1"></span>Medium</div>
-          <div class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>Secure</div>
+ <!-- Threat Dashboard Section -->
+<section class="relative bg-black text-white py-32 overflow-hidden z-0">
+  <!-- Background Effects -->
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div class="section-glow"></div>
+    <div class="webbing"></div>
+    <div class="floating-particles">
+      <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+      <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+      <div class="particle" style="left: 75%; animation-delay: 5s;"></div>
+    </div>
+  </div>
+
+  <!-- Dashboard Container -->
+  <div class="relative z-10 max-w-4xl mx-auto px-6">
+    <div class="glass-card p-8 rounded-2xl backdrop-blur-md border border-white/10">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-semibold flex items-center space-x-2">
+          <i class="fas fa-shield-alt text-blue-400"></i>
+          <span>Threat Dashboard</span>
+        </h2>
+        <div class="flex space-x-3 text-sm">
+          <span class="text-red-500">● High</span>
+          <span class="text-yellow-400">● Medium</span>
+          <span class="text-green-400">● Secure</span>
         </div>
       </div>
 
-      <!-- Live Feed Items -->
-      <div class="space-y-3">
-        <div class="flex justify-between items-center text-sm border-t border-white/10 pt-3">
-          <div><span class="text-green-400 font-medium">📍 Brooklyn Health</span> - $125K Grant Approved</div>
-          <span class="text-green-400 font-bold">APPROVED</span>
-        </div>
-        <div class="flex justify-between items-center text-sm border-t border-white/10 pt-3">
-          <div><span class="text-red-400 font-medium">⚠️ DHS Central</span> - New $10M Grant Released</div>
-          <span class="text-red-400 font-bold">ALERT</span>
-        </div>
-        <div class="flex justify-between items-center text-sm border-t border-white/10 pt-3">
-          <div><span class="text-blue-400 font-medium">✅ AI Threat Analysis</span> - Assessment Complete</div>
-          <span class="text-blue-400 font-bold">COMPLETE</span>
-        </div>
-        <div class="flex justify-between items-center text-sm border-t border-white/10 pt-3">
-          <div><span class="text-purple-400 font-medium">🧩 Metro Sector</span> - Federal Program Available</div>
-          <span class="text-purple-400 font-bold">NEW</span>
-        </div>
+      <!-- Map Placeholder -->
+      <div class="relative bg-blue-950/50 border border-white/10 backdrop-blur-md rounded-lg h-48 overflow-hidden grid place-items-center mb-8">
+        <canvas id="threatMapCanvas" class="w-full h-full absolute inset-0 z-0"></canvas>
+        <span class="z-10 text-gray-400 text-sm">Threat Signal Tracking...</span>
       </div>
 
-      <!-- CTA -->
-      <div class="text-center mt-6">
-        <button class="bg-green-500 hover:bg-green-600 text-black font-bold py-3 px-6 rounded-full text-sm shadow-xl transition-all">
-          <i class="fab fa-whatsapp mr-2"></i> Get Critical Grant Alerts
-        </button>
+      <!-- Activity Feed -->
+      <ul id="activityFeed" class="space-y-4 text-sm font-medium">
+        <!-- JS will rotate these -->
+        <li class="flex justify-between">
+          <span><span class="text-green-400">✔</span> Brooklyn Shul - $125K Grant Approved</span>
+          <span class="text-green-500">APPROVED</span>
+        </li>
+        <li class="flex justify-between">
+          <span><span class="text-red-500">⚠</span> NYC Council - New $10M Grant Released</span>
+          <span class="text-red-400">ALERT</span>
+        </li>
+        <li class="flex justify-between">
+          <span><span class="text-blue-400">🧠</span> Flatbush Synagogue - AI Assessment Complete</span>
+          <span class="text-blue-400">COMPLETE</span>
+        </li>
+        <li class="flex justify-between">
+          <span><span class="text-purple-400">📡</span> Bronx Center - Federal Program Available</span>
+          <span class="text-purple-400">NEW</span>
+        </li>
+      </ul>
+
+      <!-- CTA Button -->
+      <div class="text-center mt-10">
+        <a href="#alerts" class="bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-full text-lg shadow-md transition-all">
+          <i class="fas fa-bell mr-2"></i> Get Critical Grant Alerts
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- SCRIPT: Threat + Feed Logic -->
-<script>
-  function renderThreatIndicators() {
-    const map = document.getElementById("threat-map");
-    const colors = ["red-500", "yellow-400", "green-400"];
-    const indicators = [];
-
-    for (let i = 0; i < 5; i++) {
-      const top = Math.floor(Math.random() * 70) + 10;
-      const left = Math.floor(Math.random() * 70) + 10;
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      const delay = (Math.random() * 1.5).toFixed(1);
-
-      indicators.push(`
-        <div class="absolute" style="top:${top}%; left:${left}%;">
-          <div class="w-3 h-3 bg-${color} rounded-full animate-ping" style="animation-delay:${delay}s;"></div>
-        </div>
-      `);
-    }
-
-    map.insertAdjacentHTML("beforeend", indicators.join(''));
-  }
-
-  function renderActivityFeed() {
-    const feed = document.getElementById("activity-feed");
-    const data = [
-      { org: "Brooklyn Shelter", msg: "$125K Grant Approved", color: "green-400", status: "APPROVED" },
-      { org: "Manhattan Synagogue", msg: "AI Assessment Complete", color: "blue-400", status: "COMPLETE" },
-      { org: "Queens Public School", msg: "Guard Deployment Scheduled", color: "yellow-400", status: "SCHEDULED" },
-      { org: "Bronx Center", msg: "Federal Program Available", color: "purple-400", status: "NEW" },
-      { org: "NYC Council", msg: "New $10M Grant Released", color: "red-500", status: "ALERT" },
-      { org: "Staten Island HQ", msg: "CCTV Upgrade Funded", color: "green-400", status: "FUNDED" }
-    ];
-
-    const shuffled = data.sort(() => 0.5 - Math.random()).slice(0, 4);
-    const html = shuffled.map(entry => `
-      <div class="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg">
-        <div class="w-2 h-2 bg-${entry.color} rounded-full"></div>
-        <div class="flex-1 text-gray-200"><span class="blur-sm">${entry.org}</span> - ${entry.msg}</div>
-        <div class="text-${entry.color} text-xs font-medium">${entry.status}</div>
-      </div>
-    `).join('');
-    feed.innerHTML = html;
-  }
-
-  // Run on load
-  renderThreatIndicators();
-  renderActivityFeed();
-    
-</script>
-
-</div>
-      
-</section>
 <!-- FAQ Section -->
 <section id="faq" class="py-24 bg-black text-white">
   <div class="max-w-4xl mx-auto px-6">
