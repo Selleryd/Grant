@@ -1107,18 +1107,23 @@
   });
 
   calculateBtn.addEventListener('click', () => {
-    // Only allow if 3 questions answered
-    const answered = Object.values(selections).filter(Boolean).length;
-    if (answered !== 3) return;
+  // Block any old logic by manually setting result
+  const resultIcon = document.getElementById('result-icon');
+  const resultTitle = document.getElementById('result-title');
+  const resultDescription = document.getElementById('result-description');
 
-    // Force eligible result
-    document.getElementById('result-icon').innerHTML = '✅';
-    document.getElementById('result-title').textContent = "You're Eligible!";
-    document.getElementById('result-description').textContent = "Based on your answers, you're eligible for grant funding. Let’s schedule a consultation to move forward.";
+  resultIcon.innerHTML = '✅';
+  resultTitle.textContent = "You're Eligible!";
+  resultDescription.textContent = "Based on your answers, you're eligible for grant funding. Let’s schedule a consultation to move forward.";
 
-    results.classList.remove('hidden');
-    results.scrollIntoView({ behavior: 'smooth' });
-  });
+  results.classList.remove('hidden');
+  results.scrollIntoView({ behavior: 'smooth' });
+
+  // Optional: override any accidental styles from other scripts
+  resultIcon.classList.remove('bg-red-500', 'text-red-500');
+  resultIcon.classList.add('bg-green-500', 'text-white');
+});
+
 </script>
 
 
