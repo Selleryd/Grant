@@ -545,55 +545,54 @@
         }
     </style>
     
- <!-- Navigation-->
+<!-- Navigation-->
 </head>
 <body class="gradient-bg">
   <nav class="fixed top-0 w-full z-50 nav-blur border-b border-white/10">
-  <div class="max-w-7xl mx-auto px-6 py-4">
-    <div class="flex items-center justify-between w-full">
-      
-      <!-- Left: Logo + Text + Stars (wrapped for mobile stack) -->
-<div class="flex items-center space-x-2">
-  <img src="https://cdn.shopify.com/s/files/1/0705/0398/9562/files/Fortress_Grants_Logo.png?v=1753371031" alt="Fortress Grants Logo" class="h-8 w-auto object-contain rounded-lg" />
-  <span class="text-base sm:text-xl font-bold">Fortress Grants</span>
-  <div class="pulse-dot w-2 h-2 bg-green-400 rounded-full"></div>
-</div>
-
-
-
-        <!-- Reviews (below on mobile, inline on desktop) -->
-        <div class="flex items-center space-x-2 mt-2 sm:mt-0 sm:ml-4 text-xs sm:text-sm">
-          <div class="flex text-yellow-400">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between w-full flex-wrap sm:flex-nowrap">
+        
+        <!-- Left: Logo + Stars grouped -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-1 sm:space-y-0">
+          <a href="/" class="flex items-center space-x-2">
+            <img src="https://cdn.shopify.com/s/files/1/0705/0398/9562/files/Fortress_Grants_Logo.png?v=1753371031" alt="Fortress Grants Logo" class="h-8 w-auto object-contain rounded-lg" />
+            <div class="pulse-dot w-2 h-2 bg-green-400 rounded-full"></div>
+          </a>
+          
+          <!-- Star Rating -->
+          <div class="flex items-center space-x-2 text-xs sm:text-sm">
+            <div class="flex text-yellow-400">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <span class="text-gray-300">4.9 (100+ Happy Clients)</span>
           </div>
-          <span class="text-gray-300">4.9 (100+ Happy Clients)</span>
         </div>
+
+        <!-- Center: Nav Links -->
+        <div class="hidden md:flex space-x-6 text-sm">
+          <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
+          <a href="#what-to-expect" class="text-gray-300 hover:text-white transition-colors">What to Expect</a>
+          <a href="#reviews" class="text-gray-300 hover:text-white transition-colors">Reviews</a>
+          <a href="#calculator" class="text-gray-300 hover:text-white transition-colors">Eligibility</a>
+          <a href="#faq" class="text-gray-300 hover:text-white transition-colors">FAQ</a>
+        </div>
+
+        <!-- Right: Get Started button -->
+        <div class="flex items-center mt-2 sm:mt-0">
+          <a href="https://form.jotform.com/252026451116042" target="_blank" rel="noopener noreferrer">
+            <button class="primary-button px-5 py-2 rounded-full text-xs sm:text-sm font-medium">
+              Get Started
+            </button>
+          </a>
+        </div>
+
       </div>
-
-      <!-- Center: Nav Links -->
-      <div class="hidden md:flex space-x-6 text-sm">
-      <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
-<a href="#what-to-expect" class="text-gray-300 hover:text-white transition-colors">What to Expect</a>
-<a href="#reviews" class="text-gray-300 hover:text-white transition-colors">Reviews</a>
-<a href="#calculator" class="text-gray-300 hover:text-white transition-colors">Eligibility</a>
-<a href="#faq" class="text-gray-300 hover:text-white transition-colors">FAQ</a>
-
-      </div>
-
- <!-- Right: Get Started button -->
-<div class="flex items-center">
-  <a href="https://form.jotform.com/252026451116042" target="_blank" rel="noopener noreferrer">
-    <button class="primary-button px-5 py-2 rounded-full text-xs sm:text-sm font-medium">
-      Get Started
-    </button>
-  </a>
-</div>
-
-</nav>
+    </div>
+  </nav>
 
 
 
