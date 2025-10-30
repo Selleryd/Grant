@@ -2046,6 +2046,146 @@
 
     
 
+<style>
+  /* Overlay background */
+  .video-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(6px);
+  }
+
+  /* Video container */
+  .video-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  video {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+  }
+
+  /* Close button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .close-btn:hover {
+    background: rgba(255, 255, 255, 1);
+  }
+
+  /* Floating unmute button */
+  .unmute-btn {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    animation: glow 1.5s infinite alternate;
+  }
+
+  @keyframes glow {
+    from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.6); }
+    to { box-shadow: 0 0 25px rgba(255, 255, 255, 1); }
+  }
+</style>
+
+<!-- Watch Demo Button -->
+<a href="#" id="watchDemoBtn">
+  <button class="secondary-button px-8 py-4 rounded-full font-medium">
+    <i class="fas fa-play mr-2"></i>Watch Demo
+  </button>
+</a>
+
+<!-- Video Popup Template (hidden initially) -->
+<div id="videoPopup" class="video-overlay" style="display:none;">
+  <div class="video-container">
+    <button class="close-btn" id="closeVideo">&times;</button>
+    <video id="demoVideo" muted autoplay loop controls playsinline>
+      <source src="https://storage.googleapis.com/msgsndr/oBwMpu4Yy5BTk3j1W8F6/media/6903a1e6c3f8ca492e96865e.mov" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <button class="unmute-btn" id="unmuteBtn">🔇</button>
+  </div>
+</div>
+
+<script>
+  const watchDemoBtn = document.getElementById('watchDemoBtn');
+  const videoPopup = document.getElementById('videoPopup');
+  const closeVideo = document.getElementById('closeVideo');
+  const demoVideo = document.getElementById('demoVideo');
+  const unmuteBtn = document.getElementById('unmuteBtn');
+
+  // Open popup
+  watchDemoBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    videoPopup.style.display = 'flex';
+    demoVideo.currentTime = 0;
+    demoVideo.play();
+  });
+
+  // Close popup (X button or outside click)
+  closeVideo.addEventListener('click', closePopup);
+  videoPopup.addEventListener('click', (e) => {
+    if (e.target === videoPopup) closePopup();
+  });
+
+  function closePopup() {
+    videoPopup.style.display = 'none';
+    demoVideo.pause();
+  }
+
+  // Replay automatically when finished
+  demoVideo.addEventListener('ended', () => {
+    demoVideo.currentTime = 0;
+    demoVideo.play();
+  });
+
+  // Unmute button logic
+  unmuteBtn.addEventListener('click', () => {
+    if (demoVideo.muted) {
+      demoVideo.muted = false;
+      unmuteBtn.textContent = '🔊';
+      unmuteBtn.style.animation = 'none';
+    } else {
+      demoVideo.muted = true;
+      unmuteBtn.textContent = '🔇';
+      unmuteBtn.style.animation = 'glow 1.5s infinite alternate';
+    }
+  });
+</script>
 
 </body>
 </html>
