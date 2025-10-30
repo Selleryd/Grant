@@ -2010,6 +2010,8 @@
         }, 15000);
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'962f0a7cf610c488',t:'MTc1MzE0NjQ0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
+
 <style>
   .video-overlay {
     position: fixed;
@@ -2026,23 +2028,26 @@
     position: relative;
     width: 90%;
     max-width: 800px;
+    aspect-ratio: 16 / 9;
+    background: #000;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-    background: #000;
+    animation: fadeIn 0.3s ease;
   }
 
-  video {
+  iframe {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    border: none;
+    border-radius: 16px;
   }
 
   .close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.9);
     border: none;
     font-size: 24px;
     border-radius: 50%;
@@ -2052,39 +2057,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background 0.3s;
   }
 
-  .unmute-btn {
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    background: rgba(255,255,255,0.9);
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    animation: glow 1.5s infinite alternate;
+  .close-btn:hover {
+    background: rgba(255,255,255,1);
   }
 
-  @keyframes glow {
-    from { box-shadow: 0 0 10px rgba(255,255,255,0.6); }
-    to { box-shadow: 0 0 25px rgba(255,255,255,1); }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
   }
 </style>
 
-<!-- Video Popup -->
+<!-- Popup HTML -->
 <div id="videoPopup" class="video-overlay">
   <div class="video-container">
     <button class="close-btn" id="closeVideo">&times;</button>
-    <video id="demoVideo" muted autoplay loop controls playsinline>
-      <source src="<source src="https://www.youtube.com/watch?v=P3HBN6xuylk">
-      Your browser does not support the video tag.
-    </video>
+    <iframe id="youtubeFrame"
+      src=""
+      title="Watch Demo Video"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen>
+    </iframe>
   </div>
 </div>
 
@@ -2092,42 +2088,28 @@
   const watchDemoBtn = document.getElementById('watchDemoBtn');
   const videoPopup = document.getElementById('videoPopup');
   const closeVideo = document.getElementById('closeVideo');
-  const demoVideo = document.getElementById('demoVideo');
-  const unmuteBtn = document.getElementById('unmuteBtn');
+  const youtubeFrame = document.getElementById('youtubeFrame');
 
-  // ✅ Open popup
+  const youtubeURL = "https://www.youtube.com/embed/P3HBN6xuylk?autoplay=1&mute=1&loop=1&playlist=P3HBN6xuylk";
+
+  // Open popup
   watchDemoBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    youtubeFrame.src = youtubeURL;
     videoPopup.style.display = 'flex';
-    demoVideo.currentTime = 0;
-    demoVideo.play().catch(() => {});
   });
 
-  // ✅ Close popup
+  // Close popup
+  function closePopup() {
+    videoPopup.style.display = 'none';
+    youtubeFrame.src = ""; // Stop video
+  }
+
   closeVideo.addEventListener('click', closePopup);
   videoPopup.addEventListener('click', (e) => {
     if (e.target === videoPopup) closePopup();
   });
-
-  function closePopup() {
-    demoVideo.pause();
-    videoPopup.style.display = 'none';
-  }
-
-  // ✅ Replay automatically
-  demoVideo.addEventListener('ended', () => {
-    demoVideo.currentTime = 0;
-    demoVideo.play();
-  });
-
-  // ✅ Mute toggle
-  unmuteBtn.addEventListener('click', () => {
-    demoVideo.muted = !demoVideo.muted;
-    unmuteBtn.textContent = demoVideo.muted ? '🔇' : '🔊';
-    unmuteBtn.style.animation = demoVideo.muted ? 'glow 1.5s infinite alternate' : 'none';
-  });
 </script>
-
 
 </body>
 </html>
