@@ -2015,26 +2015,29 @@
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.85);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(8px);
   }
+
   .video-container {
     position: relative;
     width: 90%;
     max-width: 800px;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    background: #000;
   }
+
   video {
     width: 100%;
     height: auto;
-    border-radius: 16px;
-    background: #000;
+    display: block;
   }
+
   .close-btn {
     position: absolute;
     top: 10px;
@@ -2045,11 +2048,12 @@
     border-radius: 50%;
     width: 36px;
     height: 36px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
   .unmute-btn {
     position: absolute;
     bottom: 15px;
@@ -2066,25 +2070,25 @@
     cursor: pointer;
     animation: glow 1.5s infinite alternate;
   }
+
   @keyframes glow {
     from { box-shadow: 0 0 10px rgba(255,255,255,0.6); }
     to { box-shadow: 0 0 25px rgba(255,255,255,1); }
   }
 </style>
 
-<!-- Trigger -->
-<a href="#" id="watchDemoBtn">
-  <button class="secondary-button px-8 py-4 rounded-full font-medium">
-    <i class="fas fa-play mr-2"></i>Watch Demo
-  </button>
-</a>
+<!-- Single Watch Demo Button -->
+<button id="watchDemoBtn" class="secondary-button px-8 py-4 rounded-full font-medium">
+  <i class="fas fa-play mr-2"></i>Watch Demo
+</button>
 
-<!-- Popup -->
-<div id="videoPopup" class="video-overlay" style="display:none;">
+<!-- Video Popup -->
+<div id="videoPopup" class="video-overlay">
   <div class="video-container">
     <button class="close-btn" id="closeVideo">&times;</button>
     <video id="demoVideo" muted autoplay loop controls playsinline>
-      <!-- we’ll set the source dynamically in JS -->
+      <source src="<source src="https://storage.googleapis.com/msgsndr/oBwMpu4Yy5BTk3j1W8F6/media/6903a1e6c3f8ca492e96865e.mov?alt=media" type="video/mp4">
+      Your browser does not support the video tag.
     </video>
     <button class="unmute-btn" id="unmuteBtn">🔇</button>
   </div>
@@ -2097,41 +2101,39 @@
   const demoVideo = document.getElementById('demoVideo');
   const unmuteBtn = document.getElementById('unmuteBtn');
 
-  const videoUrl = "https://storage.googleapis.com/msgsndr/oBwMpu4Yy5BTk3j1W8F6/media/6903a1e6c3f8ca492e96865e.mov";
-
-  watchDemoBtn.addEventListener('click', async (e) => {
+  // ✅ Open popup
+  watchDemoBtn.addEventListener('click', (e) => {
     e.preventDefault();
-
-    // Fetch video as blob to prevent download prompt
-    const response = await fetch(videoUrl);
-    const blob = await response.blob();
-    const blobUrl = URL.createObjectURL(blob);
-    demoVideo.src = blobUrl;
-
     videoPopup.style.display = 'flex';
     demoVideo.currentTime = 0;
-    demoVideo.play();
+    demoVideo.play().catch(() => {});
   });
 
+  // ✅ Close popup
   closeVideo.addEventListener('click', closePopup);
-  videoPopup.addEventListener('click', (e) => { if (e.target === videoPopup) closePopup(); });
+  videoPopup.addEventListener('click', (e) => {
+    if (e.target === videoPopup) closePopup();
+  });
 
   function closePopup() {
     demoVideo.pause();
     videoPopup.style.display = 'none';
   }
 
+  // ✅ Replay automatically
   demoVideo.addEventListener('ended', () => {
     demoVideo.currentTime = 0;
     demoVideo.play();
   });
 
+  // ✅ Mute toggle
   unmuteBtn.addEventListener('click', () => {
     demoVideo.muted = !demoVideo.muted;
     unmuteBtn.textContent = demoVideo.muted ? '🔇' : '🔊';
     unmuteBtn.style.animation = demoVideo.muted ? 'glow 1.5s infinite alternate' : 'none';
   });
 </script>
+
 
 </body>
 </html>
