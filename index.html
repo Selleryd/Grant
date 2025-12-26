@@ -546,29 +546,39 @@
         }
 
 
-        /* Prevent the tiny horizontal “page widen” on mobile */
-html, body { overflow-x: hidden; }
+ @media (max-width: 640px){
+  /* Center the whole paragraph on mobile (if it isn’t already) */
+  .hero-gradient ~ .ai-grid ~ * {} /* ignore - no change */
 
-/* Typing container behavior */
-.typing-wrap{
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.25rem;
-}
-
-/* Mobile: typing phrase gets its own line and can wrap safely */
-@media (max-width: 640px){
+  /* Make the typing line its own centered line */
   .typing-wrap{
-    display: flex;         /* ensures it stays on its own line */
+    display: flex;
     width: 100%;
+    justify-content: center;   /* center horizontally */
+    align-items: baseline;
+    text-align: center;
+    margin-top: 0.25rem;       /* optional: small breathing room */
   }
+
+  /* Bigger + bolder typing text */
   #typing-text{
     display: inline-block;
     max-width: 100%;
-    white-space: normal;   /* allow wrap */
+    white-space: normal;
     overflow-wrap: anywhere;
+    font-weight: 800;          /* bolder */
+    font-size: 1.35rem;        /* bigger (adjust if you want) */
+    line-height: 1.2;
+  }
+
+  /* Keep cursor matching size/weight */
+  .typing-cursor{
+    font-weight: 800;
+    font-size: 1.35rem;
+    line-height: 1.2;
   }
 }
+
 
     </style>
     
